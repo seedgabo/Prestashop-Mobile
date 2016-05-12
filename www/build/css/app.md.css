@@ -8628,6 +8628,9 @@ body {
   font-size: 1.4rem;
   background-color: #fff; }
 
+.spinner-crescent circle {
+  stroke: blue; }
+
 .bottom {
   background-color: #f4f4f4;
   min-height: 30px;

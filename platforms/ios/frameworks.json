@@ -2,5 +2,6 @@
     "MapKit.framework": 1,
     "CoreLocation.framework": 1,
     "AddressBook.framework": 1,
-    "AddressBookUI.framework": 1
+    "AddressBookUI.framework": 1,
+    "QuartzCore.framework": 1
 }

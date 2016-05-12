@@ -35,6 +35,9 @@
 		77B6CA1E3391479F8F093612 /* CDVContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADBB199543346FD82E003C9 /* CDVContact.m */; };
 		62CBD25AD39B4DD38A893AAE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1419DEAE094EF7975A40C4 /* AddressBook.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A4CF40B5F9FB40C79BF03F66 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BC6350273E4EA6A56CB8A3 /* AddressBookUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F2B25C92F29343568300E120 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 900E90205A3F47A29A616B6B /* Toast+UIView.m */; };
+		757DE1807BD049F0A314FC21 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E5A67115B24AABA52A648C /* Toast.m */; };
+		2D8040FAAF0B4B3F9E4698B8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39A29FF7F0534689A1E5A63C /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +113,11 @@
 		D5EA1BD44F2B439EAD29C4DA /* CDVContact.h */ = {isa = PBXFileReference; name = "CDVContact.h"; path = "cordova-plugin-contacts/CDVContact.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		CB1419DEAE094EF7975A40C4 /* AddressBook.framework */ = {isa = PBXFileReference; name = "AddressBook.framework"; path = "System/Library/Frameworks/AddressBook.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		D2BC6350273E4EA6A56CB8A3 /* AddressBookUI.framework */ = {isa = PBXFileReference; name = "AddressBookUI.framework"; path = "System/Library/Frameworks/AddressBookUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		900E90205A3F47A29A616B6B /* Toast+UIView.m */ = {isa = PBXFileReference; name = "Toast+UIView.m"; path = "cordova-plugin-x-toast/Toast+UIView.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		33E5A67115B24AABA52A648C /* Toast.m */ = {isa = PBXFileReference; name = "Toast.m"; path = "cordova-plugin-x-toast/Toast.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		A2D837739C1F4CD6A777ED7D /* Toast+UIView.h */ = {isa = PBXFileReference; name = "Toast+UIView.h"; path = "cordova-plugin-x-toast/Toast+UIView.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		478BBC9E4D9F40C2A2B9AE4F /* Toast.h */ = {isa = PBXFileReference; name = "Toast.h"; path = "cordova-plugin-x-toast/Toast.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		39A29FF7F0534689A1E5A63C /* QuartzCore.framework */ = {isa = PBXFileReference; name = "QuartzCore.framework"; path = "System/Library/Frameworks/QuartzCore.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,7 @@
 				FCB63D1880B243B5BBA45B13 /* CoreLocation.framework in Frameworks */,
 				62CBD25AD39B4DD38A893AAE /* AddressBook.framework in Frameworks */,
 				A4CF40B5F9FB40C79BF03F66 /* AddressBookUI.framework in Frameworks */,
+				2D8040FAAF0B4B3F9E4698B8 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +204,7 @@
 				B18F729EA8274A7FA0638E84 /* CoreLocation.framework */,
 				CB1419DEAE094EF7975A40C4 /* AddressBook.framework */,
 				D2BC6350273E4EA6A56CB8A3 /* AddressBookUI.framework */,
+				39A29FF7F0534689A1E5A63C /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -252,6 +262,10 @@
 				6ADBB199543346FD82E003C9 /* CDVContact.m */,
 				0101426CE61F4F069DB5E88A /* CDVContacts.h */,
 				D5EA1BD44F2B439EAD29C4DA /* CDVContact.h */,
+				900E90205A3F47A29A616B6B /* Toast+UIView.m */,
+				33E5A67115B24AABA52A648C /* Toast.m */,
+				A2D837739C1F4CD6A777ED7D /* Toast+UIView.h */,
+				478BBC9E4D9F40C2A2B9AE4F /* Toast.h */,
 			);
 			name = Plugins;
 			path = "Prestashop Tienda online/Plugins";
@@ -382,6 +396,8 @@
 				D3FBFAE2F5A04D85BAAEE7DA /* CDVInAppBrowser.m in Sources */,
 				01CDBDD5A2A1406BA4378F65 /* CDVContacts.m in Sources */,
 				77B6CA1E3391479F8F093612 /* CDVContact.m in Sources */,
+				F2B25C92F29343568300E120 /* Toast+UIView.m in Sources */,
+				757DE1807BD049F0A314FC21 /* Toast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

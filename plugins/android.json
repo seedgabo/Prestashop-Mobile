@@ -36,6 +36,9 @@
         },
         "cordova-plugin-contacts": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         }
     },
     "dependent_plugins": {

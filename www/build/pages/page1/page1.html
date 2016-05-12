@@ -26,4 +26,10 @@
           <button clear item-right>Ver</button>
       </button>
   </ion-list>
+  <ion-infinite-scroll (infinite)="loadMoreProducts($event)" *ngIf="more">
+   <ion-infinite-scroll-content
+       loadingSpinner="crescent"
+      loadingText="Cargando Mas Productos...">
+   ></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

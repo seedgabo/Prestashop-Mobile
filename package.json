@@ -29,7 +29,8 @@
     "ionic-plugin-keyboard",
     "uk.co.workingedge.phonegap.plugin.launchnavigator",
     "cordova-plugin-inappbrowser",
-    "cordova-plugin-contacts"
+    "cordova-plugin-contacts",
+    "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": []
 }

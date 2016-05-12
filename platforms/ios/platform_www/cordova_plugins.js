@@ -363,6 +363,19 @@ module.exports = [
         "merges": [
             "Contact"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+        "id": "cordova-plugin-x-toast.Toast",
+        "pluginId": "cordova-plugin-x-toast",
+        "clobbers": [
+            "window.plugins.toast"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-x-toast/test/tests.js",
+        "id": "cordova-plugin-x-toast.tests",
+        "pluginId": "cordova-plugin-x-toast"
     }
 ];
 module.exports.metadata = 
@@ -380,7 +393,8 @@ module.exports.metadata =
     "ionic-plugin-keyboard": "2.1.0",
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4",
     "cordova-plugin-inappbrowser": "1.4.0",
-    "cordova-plugin-contacts": "2.1.0"
+    "cordova-plugin-contacts": "2.1.0",
+    "cordova-plugin-x-toast": "2.5.1"
 }
 // BOTTOM OF METADATA
 });

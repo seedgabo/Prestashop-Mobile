@@ -47,9 +47,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ionic_angular_1 = require('ionic-angular');
 var prestashop_service_1 = require('../../providers/prestashop-service/prestashop-service');
 var producto_details_1 = require('../producto-details/producto-details');
+var ionic_native_1 = require('ionic-native');
 var Page1 = (function () {
     function Page1(ps, nav) {
         this.queryTxt = "";
+        this.page = 1;
+        this.more = true;
         this.ps = ps;
         this.nav = nav;
         this.ps.getConfigShop();
@@ -60,12 +63,41 @@ var Page1 = (function () {
     Page1.prototype.getProducts = function (event) {
         var _this = this;
         if (this.queryTxt == "") {
+            this.more = false;
             this.productos = undefined;
             return false;
         }
+        if (this.queryTxt.length < 3) {
+            ionic_native_1.Toast.showShortBottom("ingrese por lo menos 3 letras").subscribe();
+            this.more = false;
+            return false;
+        }
+        this.more = true;
+        this.page = 1;
         var query = "?filter[name]=%[" + encodeURI(this.queryTxt) + "]%&display=full&price[precio][use_tax]=1&limit=15";
         this.ps.loadProducts(query).then(function (data) {
+            if (data != undefined && data.length < 15)
+                _this.more = false;
             _this.productos = data;
+        });
+    };
+    Page1.prototype.loadMoreProducts = function (infiniteScroll) {
+        var _this = this;
+        if (this.queryTxt == "") {
+            this.productos = undefined;
+            this.more = false;
+            return false;
+        }
+        var query = "?filter[name]=%[" + encodeURI(this.queryTxt) + "]%&display=full&price[precio][use_tax]=1&limit=" + (this.page * 15) + "," + 15;
+        this.page++;
+        this.ps.loadProducts(query).then(function (data) {
+            if (data && data.length != 0) {
+                _this.productos = _this.productos.concat(data);
+            }
+            if (data != undefined && data.length < 15) {
+                _this.more = false;
+            }
+            infiniteScroll.complete();
         });
     };
     Page1.prototype.toCurrency = function (number) {
@@ -80,7 +112,7 @@ var Page1 = (function () {
     return Page1;
 }());
 exports.Page1 = Page1;
-},{"../../providers/prestashop-service/prestashop-service":7,"../producto-details/producto-details":5,"ionic-angular":341}],3:[function(require,module,exports){
+},{"../../providers/prestashop-service/prestashop-service":7,"../producto-details/producto-details":5,"ionic-angular":341,"ionic-native":363}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

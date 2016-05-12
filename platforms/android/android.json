@@ -51,6 +51,10 @@
                         {
                             "xml": "<feature name=\"Contacts\"><param name=\"android-package\" value=\"org.apache.cordova.contacts.ContactManager\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Toast\"><param name=\"android-package\" value=\"nl.xservices.plugins.Toast\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -117,6 +121,9 @@
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
         "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
+        "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         }
     },
@@ -411,6 +418,17 @@
             "merges": [
                 ""
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+            "id": "cordova-plugin-x-toast.Toast",
+            "clobbers": [
+                "window.plugins.toast"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-x-toast/test/tests.js",
+            "id": "cordova-plugin-x-toast.tests"
         }
     ],
     "plugin_metadata": {
@@ -426,6 +444,7 @@
         "cordova-plugin-actionsheet": "2.2.2",
         "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4",
         "cordova-plugin-inappbrowser": "1.4.0",
-        "cordova-plugin-contacts": "2.1.0"
+        "cordova-plugin-contacts": "2.1.0",
+        "cordova-plugin-x-toast": "2.5.1"
     }
 }
