@@ -1,0 +1,39 @@
+
+<ion-navbar primary *navbar>
+    <ion-title>
+        Categorias
+    </ion-title>
+</ion-navbar>
+
+<ion-content class="page2">
+    <ion-card no-padding>
+        <ion-list no-padding>
+            <ion-list-header>
+                <button light small round (click)="toggleMenuCategory()"><ion-icon name="menu" ></ion-icon></button>
+                <button light small  *ngFor="#item of order, #i = index"  (click)="order = order.slice(0,i); cat = filtrarCategorias(item)">
+                    {{ getCagoriabyId(item).name }}
+                </button>
+            </ion-list-header>
+            <button class="category-item" ion-item *ngFor="#item of cat" (click)="cat = filtrarCategorias(item.id)">
+                <ion-avatar item-left>
+                    <img [src]="ps.url + 'images/categories/'+ item.id + ps.append" alt="</>" title="Imagen categoria" />
+                </ion-avatar>
+                {{item.name}}
+            </button>
+        </ion-list>
+    </ion-card>
+
+    <ion-list>
+        <button ion-item  *ngFor="#producto of productos" (click)="verProducto(producto)">
+            <ion-thumbnail item-left>
+                <img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append}}">
+                <img *ngIf="!producto.id_default_image" src="img/sin-imagen.jpg">
+            </ion-thumbnail>
+            <h2>{{producto.name}}</h2>
+            <h3 secondary>{{producto.quantity > 0 ? producto.quantity :  "Disponible"}}</h3>
+            <p>{{ toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</p>
+            <button clear item-right>Ver</button>
+        </button>
+    </ion-list>
+
+</ion-content>

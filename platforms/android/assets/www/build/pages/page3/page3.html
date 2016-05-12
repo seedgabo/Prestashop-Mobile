@@ -1,0 +1,41 @@
+
+<ion-navbar primary *navbar>
+    <ion-title>
+        Tiendas y Contactos
+    </ion-title>
+</ion-navbar>
+
+<ion-content class="page3">
+
+    <ion-card class="adv-map" *ngFor="#store of stores; #i = index">
+        <ion-card-header>
+            <ion-icon name="map" item-left large></ion-icon> {{store.name | uppercase}}
+        </ion-card-header>
+        <div [attr.id]="'map' +i" class="map"></div>
+        <button fab fab-right fab-top (click)=navigate(store.latitude,store.longitude)>
+            <ion-icon name="navigate" ></ion-icon>
+        </button>
+
+        <ion-item>
+            <ion-icon name="pin" item-left large ></ion-icon>
+            <h2>Dirección</h2>
+            <button clear primary small (click)="map(store.lat,store.lon)">{{store.address1}}</button>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="phone-portrait" item-left large ></ion-icon>
+            <h2>Teléfono <small>{{store.phone}}</small></h2>
+            <button clear primary small (click)="call(store.phone)"><ion-icon name="call"> Llamar</ion-icon></button>
+            <button clear primary small (click)="sms(store.phone)"><ion-icon name="send"> Sms</ion-icon></button>
+            <button clear primary small (click)="addContact(store)"><ion-icon name="person-add"> Agregar</ion-icon></button>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="mail-open" item-left large ></ion-icon>
+            <h2>Email</h2>
+            <button clear primary small (click)="mail(store.email)"><ion-icon name="mail"></ion-icon> {{store.email}}</button>
+        </ion-item>
+
+
+    </ion-card>
+</ion-content>

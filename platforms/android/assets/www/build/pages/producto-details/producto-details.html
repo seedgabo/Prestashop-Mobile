@@ -1,0 +1,67 @@
+<!--
+Generated template for the ProductoDetailsPage page.
+
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
+-->
+<ion-navbar secondary *navbar>
+    <ion-title>{{producto.name}}</ion-title>
+</ion-navbar>
+
+<ion-content padding class="producto-details">
+    <ion-row responsive-sm>
+        <ion-col width-50>
+
+            <ion-card padding>
+                <img id="imagen" *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + imgShow + ps.append}}">
+                <img *ngIf="!producto.id_default_image" src="img/sin-imagen.jpg">
+
+                <ion-row>
+                    <ion-col width-20 *ngFor="#imagen of producto.associations.images">
+                        <img (click)="imgShow = imagen.id" src="{{ps.url + 'images/products/' + producto.id + '/' + imagen.id +'/small_default' + ps.append}}"
+                        alt=""  />
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+
+        </ion-col>
+
+        <ion-col>
+
+            <ion-card>
+                <ion-card-header>
+                    {{producto.name}}
+                </ion-card-header>
+                <ion-list>
+                    <ion-item>
+                        <ion-icon name="checkmark" primary small item-left></ion-icon>
+                        <h3><b>Disponibilidad:</b> {{producto.active == 1 ?  "Disponible" : "No Disponible"}}</h3>
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon name="archive" primary small item-left></ion-icon>
+                        <h3> <b>Stock:</b> {{producto.quantity ? producto.quantity :  "0"}}</h3>
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon name="pricetag" primary small item-left></ion-icon>
+                        <h3><b> Precio: </b> {{ toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</h3>
+                    </ion-item>
+                    <ion-item>
+                        <ion-icon name="alert" primary small item-left></ion-icon>
+                        <h3><b> Condición: </b> {{ producto.condition == "new" ? "Producto Nuevo" : "" }} </h3>
+                    </ion-item>
+                    <ion-item>
+                        <h2>Descripción</h2> <br>
+                        <div [hidden]="short"  [innerHTML]="producto.description_short"></div>
+                        <div [hidden]="!short" [innerHTML]="producto.description"></div>
+                        <div style="text-align:center;">
+                            <button  round outline secondary small (click)="short= !short">{{short ? "Ver Menos" :"Ver Mas"}}</button>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+            <button light full (click)="openProductoInWeb()"> <ion-icon name="cart"></ion-icon> Ver En Tienda</button>
+
+        </ion-col>
+
+    </ion-row>
+</ion-content>
