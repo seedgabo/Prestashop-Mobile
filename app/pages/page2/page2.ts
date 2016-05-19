@@ -1,4 +1,5 @@
-import {Page,NavController} from 'ionic-angular';
+import {Page,NavController,Content} from 'ionic-angular';
+import {ViewChild} from 'angular2/core';
 import {ProductoDetailsPage} from '../producto-details/producto-details';
 import {PrestashopService}  from '../../providers/prestashop-service/prestashop-service';
 
@@ -6,13 +7,16 @@ import {PrestashopService}  from '../../providers/prestashop-service/prestashop-
     templateUrl: 'build/pages/page2/page2.html',
 })
 export class Page2 {
-    principal:number = 2;
-    order = [];
-    actual:number = this.principal;
-    cat:any;
     ps: PrestashopService;
     nav:NavController;
+    @ViewChild(Content) content: Content;
     productos:any;
+    more= true;
+    page=1;
+    order = [];
+    cat:any;
+    principal:number = 2;
+    actual:number = this.principal;
 
     constructor(ps: PrestashopService, nav:NavController) {
         this.ps = ps;
@@ -39,17 +43,42 @@ export class Page2 {
     }
 
     getProductsbyCategory(categoria_id){
-        this.ps.loadProducts("?display=full&limit=25&price[precio][use_tax]=1&filter[id_category_default]="+categoria_id).then((data)=> {this.productos = data;});
+        this.more= true;
+        this.page =1 ;
+        this.ps.loadProducts("?display=full&limit=25&price[precio][use_tax]=1&filter[id_category_default]="+categoria_id).then((data:Array<any>)=> {
+            this.productos = data;
+            if(data!=undefined && data.length < 25){
+                this.more= false;
+            }
+        });
+    }
+
+    loadMoreProducts(infiniteScroll){
+        var query ="?display=full&price[precio][use_tax]=1&limit="+(this.page*25)+","+25+ "&filter[id_category_default]="+this.order[this.order.length-1];
+        this.page++;
+        this.ps.loadProducts(query).then((data:Array<any>)=>{
+            if (data!=undefined && data.length != 0 && this.productos!=undefined){
+                this.productos = this.productos.concat(data);
+            }
+            if(data!=undefined && data.length < 25){
+                this.more= false;
+            }
+
+            infiniteScroll.complete();
+        });
     }
 
     toggleMenuCategory(){
-        $('.category-item').toggle('fast');
+        $('.category-item').toggle();
     }
 
     toCurrency(number:string){
         return  Number.parseFloat(number);
     }
 
+    toTop() {
+        this.content.scrollToTop();
+    }
 
     verProducto(producto){
         this.nav.push(ProductoDetailsPage, {producto: producto});

@@ -1,4 +1,5 @@
-import {Page,NavController} from 'ionic-angular';
+import {Page,NavController, Content} from 'ionic-angular';
+import {ViewChild} from 'angular2/core';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 import {ProductoDetailsPage} from '../producto-details/producto-details';
 import {Toast} from 'ionic-native';
@@ -9,6 +10,7 @@ import {Toast} from 'ionic-native';
 export class Page1 {
     queryTxt:string="";
     ps:PrestashopService;
+    @ViewChild(Content) content: Content;
     productos:any;
     nav:NavController;
     page:number=1;
@@ -55,7 +57,7 @@ export class Page1 {
         var query ="?filter[name]=%[" + encodeURI(this.queryTxt) +"]%&display=full&price[precio][use_tax]=1&limit="+(this.page*15)+","+15;
         this.page++;
         this.ps.loadProducts(query).then((data:Array<any>)=>{
-            if (data && data.length != 0){
+            if (data!=undefined && data.length != 0){
                 this.productos = this.productos.concat(data);
             }
             if(data!=undefined && data.length < 15){
@@ -70,4 +72,7 @@ export class Page1 {
         return  Number.parseFloat(number);
     }
 
+    toTop() {
+        this.content.scrollToTop();
+    }
 }

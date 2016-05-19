@@ -11,18 +11,18 @@
 
 <ion-content padding class="page1">
     <div *ngIf="!productos">
-        <img src="{{ps.url+ 'images/general/header' +ps.append}}" alt="" />
+        <img [src]=" ps.url + 'images/general/header' + ps.append" alt=""/>
         <h2>{{ps.shopname | uppercase}}</h2>
     </div>
-  <ion-list>
-      <button ion-item  *ngFor="#producto of productos" (click)="verProducto(producto)">
+  <ion-list *ngIf="productos != undefined" [virtualScroll]="productos">
+      <button ion-item  *virtualItem="#producto" (click)="verProducto(producto)">
           <ion-thumbnail item-left>
-              <img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append}}">
-              <img *ngIf="!producto.id_default_image" src="img/sin-imagen.jpg">
+              <ion-img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append}}"> </ion-img>
+              <ion-img *ngIf="!producto.id_default_image" src="{{'img/sin-imagen.jpg'}}"> </ion-img>
           </ion-thumbnail>
           <h2>{{producto.name}}</h2>
           <h3 secondary>{{producto.quantity > 0 ? producto.quantity :  "Disponible"}}</h3>
-          <p>{{ toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</p>
+          <p>{{toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</p>
           <button clear item-right>Ver</button>
       </button>
   </ion-list>
@@ -33,3 +33,5 @@
    ></ion-infinite-scroll-content>
  </ion-infinite-scroll>
 </ion-content>
+
+<button fab fab-top fab-right clear style="z-index:1000" (click)="toTop()"><ion-icon name="arrow-dropup"></ion-icon></button>

@@ -45,6 +45,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
+var core_1 = require('angular2/core');
 var prestashop_service_1 = require('../../providers/prestashop-service/prestashop-service');
 var producto_details_1 = require('../producto-details/producto-details');
 var ionic_native_1 = require('ionic-native');
@@ -91,7 +92,7 @@ var Page1 = (function () {
         var query = "?filter[name]=%[" + encodeURI(this.queryTxt) + "]%&display=full&price[precio][use_tax]=1&limit=" + (this.page * 15) + "," + 15;
         this.page++;
         this.ps.loadProducts(query).then(function (data) {
-            if (data && data.length != 0) {
+            if (data != undefined && data.length != 0) {
                 _this.productos = _this.productos.concat(data);
             }
             if (data != undefined && data.length < 15) {
@@ -103,6 +104,13 @@ var Page1 = (function () {
     Page1.prototype.toCurrency = function (number) {
         return Number.parseFloat(number);
     };
+    Page1.prototype.toTop = function () {
+        this.content.scrollToTop();
+    };
+    __decorate([
+        core_1.ViewChild(ionic_angular_1.Content), 
+        __metadata('design:type', ionic_angular_1.Content)
+    ], Page1.prototype, "content", void 0);
     Page1 = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/page1/page1.html',
@@ -112,7 +120,7 @@ var Page1 = (function () {
     return Page1;
 }());
 exports.Page1 = Page1;
-},{"../../providers/prestashop-service/prestashop-service":7,"../producto-details/producto-details":5,"ionic-angular":341,"ionic-native":363}],3:[function(require,module,exports){
+},{"../../providers/prestashop-service/prestashop-service":7,"../producto-details/producto-details":5,"angular2/core":10,"ionic-angular":341,"ionic-native":363}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -124,12 +132,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ionic_angular_1 = require('ionic-angular');
+var core_1 = require('angular2/core');
 var producto_details_1 = require('../producto-details/producto-details');
 var prestashop_service_1 = require('../../providers/prestashop-service/prestashop-service');
 var Page2 = (function () {
     function Page2(ps, nav) {
-        this.principal = 2;
+        this.more = true;
+        this.page = 1;
         this.order = [];
+        this.principal = 2;
         this.actual = this.principal;
         this.ps = ps;
         this.nav = nav;
@@ -153,17 +164,45 @@ var Page2 = (function () {
     };
     Page2.prototype.getProductsbyCategory = function (categoria_id) {
         var _this = this;
-        this.ps.loadProducts("?display=full&limit=25&price[precio][use_tax]=1&filter[id_category_default]=" + categoria_id).then(function (data) { _this.productos = data; });
+        this.more = true;
+        this.page = 1;
+        this.ps.loadProducts("?display=full&limit=25&price[precio][use_tax]=1&filter[id_category_default]=" + categoria_id).then(function (data) {
+            _this.productos = data;
+            if (data != undefined && data.length < 25) {
+                _this.more = false;
+            }
+        });
+    };
+    Page2.prototype.loadMoreProducts = function (infiniteScroll) {
+        var _this = this;
+        var query = "?display=full&price[precio][use_tax]=1&limit=" + (this.page * 25) + "," + 25 + "&filter[id_category_default]=" + this.order[this.order.length - 1];
+        this.page++;
+        this.ps.loadProducts(query).then(function (data) {
+            if (data != undefined && data.length != 0 && _this.productos != undefined) {
+                _this.productos = _this.productos.concat(data);
+            }
+            if (data != undefined && data.length < 25) {
+                _this.more = false;
+            }
+            infiniteScroll.complete();
+        });
     };
     Page2.prototype.toggleMenuCategory = function () {
-        $('.category-item').toggle('fast');
+        $('.category-item').toggle();
     };
     Page2.prototype.toCurrency = function (number) {
         return Number.parseFloat(number);
     };
+    Page2.prototype.toTop = function () {
+        this.content.scrollToTop();
+    };
     Page2.prototype.verProducto = function (producto) {
         this.nav.push(producto_details_1.ProductoDetailsPage, { producto: producto });
     };
+    __decorate([
+        core_1.ViewChild(ionic_angular_1.Content), 
+        __metadata('design:type', ionic_angular_1.Content)
+    ], Page2.prototype, "content", void 0);
     Page2 = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/page2/page2.html',
@@ -173,7 +212,7 @@ var Page2 = (function () {
     return Page2;
 }());
 exports.Page2 = Page2;
-},{"../../providers/prestashop-service/prestashop-service":7,"../producto-details/producto-details":5,"ionic-angular":341}],4:[function(require,module,exports){
+},{"../../providers/prestashop-service/prestashop-service":7,"../producto-details/producto-details":5,"angular2/core":10,"ionic-angular":341}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -332,11 +371,11 @@ var PrestashopService = (function () {
     function PrestashopService(http) {
         var _this = this;
         this.http = http;
-        this.url = "http://www.eycproveedores.com/tienda/api/";
-        this.urlProduct = "http://www.eycproveedores.com/tienda/index.php?id_product=ProductID&controller=product";
-        this.urlCategory = "http://www.eycproveedores.com/tienda/index.php?id_category=CategoryID&controller=category";
+        this.url = "http://residenciasonline.com/pupuzo/api/";
+        this.urlProduct = "http://residenciasonline.com/pupuzo/index.php?id_product=ProductID&controller=product";
+        this.urlCategory = "http://residenciasonline.com/pupuzo/index.php?id_category=CategoryID&controller=category";
         this._COOKIE_KEY_ = "ZWitXiW4jqb73Ny0x0zGQi0GaU06aAtpRLqFaL2a8myyXA2stwKyQIF4";
-        this.append = "&ws_key=KN2FTYHN3H63DKP82WWRHCDNKQZWE5U1&output_format=JSON";
+        this.append = "&ws_key=AJWV1D43443299DQIIJJEFHI4DTMA41F&output_format=JSON";
         this.getCategories().then(function (data) { _this.categories = data; });
     }
     PrestashopService.prototype.loadProducts = function (filter) {
@@ -360,7 +399,7 @@ var PrestashopService = (function () {
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 resolve(data.categories);
-            });
+            }, function (error) { console.log(error); });
         });
     };
     PrestashopService.prototype.getStockByProduct = function (product_id) {
@@ -378,9 +417,9 @@ var PrestashopService = (function () {
     };
     PrestashopService.prototype.getConfigShop = function () {
         var _this = this;
-        var filter = "&display=full&filter[name]=PS_SHOP_NAME";
+        var filter = "?display=full&filter[name]=PS_SHOP_NAME";
         return new Promise(function (resolve) {
-            _this.http.get(_this.url + "configurations/" + filter + _this.append)
+            _this.http.get(_this.url + "configurations" + filter + _this.append)
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 if (data.configurations.length > 0)

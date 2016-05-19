@@ -10,10 +10,16 @@
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
         "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
         "cordova-plugin-splashscreen": {
@@ -25,30 +31,24 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
         "uk.co.workingedge.phonegap.plugin.launchnavigator": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-x-toast": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         }
     },
     "dependent_plugins": {
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         }
     }

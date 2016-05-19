@@ -5,11 +5,11 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PrestashopService {
-    url: string = "http://www.eycproveedores.com/tienda/api/";
-    urlProduct = "http://www.eycproveedores.com/tienda/index.php?id_product=ProductID&controller=product";
-    urlCategory = "http://www.eycproveedores.com/tienda/index.php?id_category=CategoryID&controller=category";
+    url: string = "http://residenciasonline.com/pupuzo/api/";
+    urlProduct = "http://residenciasonline.com/pupuzo/index.php?id_product=ProductID&controller=product";
+    urlCategory = "http://residenciasonline.com/pupuzo/index.php?id_category=CategoryID&controller=category";
     _COOKIE_KEY_ = "ZWitXiW4jqb73Ny0x0zGQi0GaU06aAtpRLqFaL2a8myyXA2stwKyQIF4";
-    append: string = "&ws_key=KN2FTYHN3H63DKP82WWRHCDNKQZWE5U1&output_format=JSON";
+    append: string = "&ws_key=AJWV1D43443299DQIIJJEFHI4DTMA41F&output_format=JSON";
 
     categories:any;
     shopname:String;
@@ -41,7 +41,7 @@ export class PrestashopService {
             .map(res => res.json())
             .subscribe(data => {
                 resolve(data.categories);
-            });
+            }, error => {console.log(error)});
         });
     }
 
@@ -63,9 +63,9 @@ export class PrestashopService {
 
 
     getConfigShop(){
-        var filter= "&display=full&filter[name]=PS_SHOP_NAME";
+        var filter= "?display=full&filter[name]=PS_SHOP_NAME";
         return new Promise(resolve => {
-            this.http.get(this.url + "configurations/" + filter + this.append)
+            this.http.get(this.url + "configurations" + filter + this.append)
             .map(res => res.json())
             .subscribe(data => {
                 if(data.configurations.length>0)

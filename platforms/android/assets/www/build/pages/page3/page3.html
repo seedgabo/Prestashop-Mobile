@@ -11,8 +11,9 @@
         <ion-card-header>
             <ion-icon name="map" item-left large></ion-icon> {{store.name | uppercase}}
         </ion-card-header>
-        <div [attr.id]="'map' +i" class="map"></div>
-        <button fab fab-right fab-top (click)=navigate(store.latitude,store.longitude)>
+        <div [attr.id]="'map' +i" class="map">
+        </div>
+        <button fab fab-right fab-top style="top:50px;" (click)="navigate(store.latitude,store.longitude)">
             <ion-icon name="navigate" ></ion-icon>
         </button>
 
