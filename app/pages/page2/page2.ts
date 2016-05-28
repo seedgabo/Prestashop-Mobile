@@ -2,6 +2,8 @@ import {Page,NavController,Content} from 'ionic-angular';
 import {ViewChild} from 'angular2/core';
 import {ProductoDetailsPage} from '../producto-details/producto-details';
 import {PrestashopService}  from '../../providers/prestashop-service/prestashop-service';
+import {UserPage} from '../user-page/user-page';
+import {CarritoPage} from '../carrito/carrito';
 
 @Page({
     templateUrl: 'build/pages/page2/page2.html',
@@ -15,6 +17,7 @@ export class Page2 {
     page=1;
     order = [];
     cat:any;
+    toggleMenu= true;
     principal:number = 2;
     actual:number = this.principal;
 
@@ -68,9 +71,6 @@ export class Page2 {
         });
     }
 
-    toggleMenuCategory(){
-        $('.category-item').toggle();
-    }
 
     toCurrency(number:string){
         return  Number.parseFloat(number);
@@ -82,5 +82,13 @@ export class Page2 {
 
     verProducto(producto){
         this.nav.push(ProductoDetailsPage, {producto: producto});
+    }
+
+    navToUser(){
+        this.nav.push(UserPage);
+    }
+
+    navToCarrito(){
+        this.nav.push(CarritoPage);
     }
 }

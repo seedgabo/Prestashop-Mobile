@@ -1,0 +1,48 @@
+<ion-navbar *navbar primary>
+    <ion-title>Usuario</ion-title>
+    <ion-buttons end>
+        <!-- <button (click)="nav.pop()"> <ion-icon name="close"></ion-icon></button> -->
+    </ion-buttons>
+</ion-navbar>
+
+<ion-content padding class="user-page">
+    <ion-card *ngIf="ps.user" text-center>
+        <h1>{{ps.user.firstname}} {{ps.user.lastname}}</h1>
+        <h2>Email: {{ps.user.email}}</h2>
+        <h2>Sexo: {{ps.user.id_gender == 1 ? 'Hombre' : 'Mujer'}}</h2>
+        <h3>Fecha de Nacimiento {{ps.user.birthday}}</h3>
+        <button center block danger outline (click)="ps.user = undefined"> Cerrar Sesión</button>
+        <ion-list radio-group>
+            <ion-item *ngFor="#address of ps.addresses, #i = index">
+                <ion-label>
+                    <h1 text-center>{{address.alias}}</h1>
+                    <h2>{{address.address1}}</h2>
+                    <h4>Ciudad: {{address.city}}</h4>
+                </ion-label>
+                <ion-radio  [value]="address.id"></ion-radio>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+
+
+
+    <div *ngIf="!ps.user">
+        <h1 text-center> Iniciar Sesión </h1>
+        <ion-item>
+            <ion-label floating> Correo</ion-label>
+            <ion-input [(ngModel)]="email" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating> Contraseña</ion-label>
+            <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+        <br>
+        <button block primary outline large (click)="login(email,password)"><ion-icon name="log-in"></ion-icon> Iniciar</button>
+        <br>
+        <p danger>¿Aun no registrado?</p>
+        <button block dark outline ><ion-icon name="person"></ion-icon><ion-icon name="add"></ion-icon>  Registrarse</button>
+    </div>
+
+</ion-content>

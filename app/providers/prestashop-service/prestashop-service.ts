@@ -1,22 +1,33 @@
 import {Injectable} from 'angular2/core';
 import {Http,Headers} from 'angular2/http';
+import {Storage,SqlStorage} from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
 export class PrestashopService {
-    url: string = "http://residenciasonline.com/pupuzo/api/";
-    urlProduct = "http://residenciasonline.com/pupuzo/index.php?id_product=ProductID&controller=product";
-    urlCategory = "http://residenciasonline.com/pupuzo/index.php?id_category=CategoryID&controller=category";
+    storage = new Storage(SqlStorage);
+    url: string = "http://www.eycproveedores.com/tienda/api/";
+    urlProduct = "http://www.eycproveedores.com/tienda/index.php?id_product=ProductID&controller=product";
+    urlCategory = "http://www.eycproveedores.com/tienda/index.php?id_category=CategoryID&controller=category";
     _COOKIE_KEY_ = "ZWitXiW4jqb73Ny0x0zGQi0GaU06aAtpRLqFaL2a8myyXA2stwKyQIF4";
-    append: string = "&ws_key=AJWV1D43443299DQIIJJEFHI4DTMA41F&output_format=JSON";
+    append: string = "&ws_key=KN2FTYHN3H63DKP82WWRHCDNKQZWE5U1&output_format=JSON";
 
     categories:any;
     shopname:String;
     user:any;
-
+    carrito:Array<any>= [{name:'nombre', quantity:30, price:1000}];
+    addresses:any;
+    
     constructor(public http: Http) {
         this.getCategories().then((data) => {this.categories = data; });
+        this.storage.getJson('user').then(data => {
+            if (data.email != undefined) {
+                this.user = data;
+                this.getAdresssByUser(this.user);
+            }
+
+        });
     }
 
 
@@ -86,6 +97,19 @@ export class PrestashopService {
         });
     }
 
+    getAdresses(filtro?:string){
+        var  filter = "&display=full" ;
+        if (filtro){
+            filter = filtro + filter;
+        }
+        return new Promise(resolve => {
+            this.http.get(this.url + "addresses" + filter + this.append)
+            .map(res => res.json())
+            .subscribe(data => {
+                resolve(data.addresses);
+            }, error => {console.log(error)});
+        });
+    }
 
     login(user,password){
         var filter="?filter[email]="+user+"&filter[passwd]="+this.encryptPassword(password)+"&display=full";
@@ -95,10 +119,18 @@ export class PrestashopService {
             .subscribe(data => {
                 if(data.customers != undefined){
                     this.user = data.customers[0];
+                    this.storage.setJson('user', this.user);
                 }
                 resolve(data);
             });
         });
     }
 
+    getAdresssByUser(user){
+        let filtro ="?filter[id_customer]=" + user.id;
+        this.getAdresses(filtro).then(data => {
+            this.addresses = data;
+            console.log(data);
+        })
+    }
 }

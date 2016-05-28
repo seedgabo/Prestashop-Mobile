@@ -1,7 +1,9 @@
-import {Page,NavController, Content} from 'ionic-angular';
+import {Page,NavController, Content, Modal} from 'ionic-angular';
 import {ViewChild} from 'angular2/core';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 import {ProductoDetailsPage} from '../producto-details/producto-details';
+import {UserPage} from '../user-page/user-page';
+import {CarritoPage} from '../carrito/carrito';
 import {Toast} from 'ionic-native';
 
 @Page({
@@ -9,6 +11,7 @@ import {Toast} from 'ionic-native';
 })
 export class Page1 {
     queryTxt:string="";
+    buscar:boolean = false;
     ps:PrestashopService;
     @ViewChild(Content) content: Content;
     productos:any;
@@ -74,5 +77,13 @@ export class Page1 {
 
     toTop() {
         this.content.scrollToTop();
+    }
+
+    navToUser(){
+        this.nav.push(UserPage);
+    }
+
+    navToCarrito(){
+        this.nav.push(CarritoPage);
     }
 }

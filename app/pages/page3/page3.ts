@@ -1,15 +1,19 @@
-import {Page} from 'ionic-angular';
+import {Page, NavController} from 'ionic-angular';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 import {InAppBrowser,LaunchNavigator,Contacts} from 'ionic-native';
+import {UserPage} from '../user-page/user-page';
+import {CarritoPage} from '../carrito/carrito';
 
 @Page({
     templateUrl: 'build/pages/page3/page3.html'
 })
 export class Page3 {
     ps:PrestashopService;
+    nav:NavController;
     stores:any;
-    constructor(ps:PrestashopService) {
+    constructor(ps:PrestashopService, nav:NavController) {
         this.ps = ps;
+        this.nav = nav;
         this.ps.getStores().then((data) => {
             this.stores = data
             window.setTimeout( ()=>{
@@ -61,4 +65,11 @@ export class Page3 {
         LaunchNavigator.navigate([lat, lon]);
     }
 
+    navToUser(){
+        this.nav.push(UserPage);
+    }
+
+    navToCarrito(){
+        this.nav.push(CarritoPage);
+    }
 }

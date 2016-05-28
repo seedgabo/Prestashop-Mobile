@@ -3,18 +3,27 @@
     <ion-title>
         Categorias
     </ion-title>
+    <ion-buttons end>
+         <button (click)="navToCarrito()">
+             <ion-icon name="cart"></ion-icon>
+         </button>
+
+         <button (click)="navToUser()">
+             <ion-icon name="person"></ion-icon>
+         </button>
+    </ion-buttons>
 </ion-navbar>
 
 <ion-content  class="page2">
 
     <ion-card  no-padding>
         <div>
-            <button light small round (click)="toggleMenuCategory()"><ion-icon name="menu" ></ion-icon></button>
+            <button light small round (click)="toggleMenu= !toggleMenu"><ion-icon name="menu" ></ion-icon></button>
             <button light small  *ngFor="#item of order, #i = index"  (click)="order = order.slice(0,i); cat = filtrarCategorias(item);">
                 {{ getCagoriabyId(item).name }}
             </button>
         </div>
-        <ion-list >
+        <ion-list *ngIf="toggleMenu">
 
             <button class="category-item" ion-item *ngFor="#item of cat" (click)="cat = filtrarCategorias(item.id)">
                 <ion-avatar item-left>
@@ -25,10 +34,10 @@
         </ion-list>
     </ion-card>
 
-    <ion-list approxItemHeight="100px" bufferRatio="4">
-        <button ion-item  *ngFor="#producto of productos" (click)="verProducto(producto)">
+    <ion-list [virtualScroll]="productos" approxItemHeight="100px" bufferRatio="4">
+        <button ion-item  *virtualItem="#producto" (click)="verProducto(producto)">
             <ion-thumbnail item-left>
-                <img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append}}"/>
+                <ion-img *ngIf="producto.id_default_image" [src]="ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append"></ion-img>
                 <img *ngIf="!producto.id_default_image" src="img/sin-imagen.jpg"/>
             </ion-thumbnail>
             <h2>{{producto.name}}</h2>

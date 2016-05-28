@@ -1,9 +1,17 @@
 <ion-navbar primary *navbar>
   <ion-toolbar>
-      <ion-searchbar debounce="500" [(ngModel)]="queryTxt" (input)="getProducts($event)"> </ion-searchbar>
+      <ion-searchbar *ngIf="buscar" debounce="500" [(ngModel)]="queryTxt" (input)="getProducts($event)"> </ion-searchbar>
       <ion-buttons end>
-          <button >
-              <ion-icon name="search"></ion-icon>
+          <button  (click)="buscar= !buscar; queryTxt=''">
+              <ion-icon [name]="buscar ? 'close' : 'search'"></ion-icon>
+          </button>
+
+          <button (click)="navToCarrito()">
+              <ion-icon name="cart"></ion-icon>
+          </button>
+
+          <button (click)="navToUser()">
+              <ion-icon name="person"></ion-icon>
           </button>
       </ion-buttons>
   </ion-toolbar>
@@ -14,6 +22,7 @@
         <img [src]=" ps.url + 'images/general/header' + ps.append" alt=""/>
         <h2>{{ps.shopname | uppercase}}</h2>
     </div>
+
   <ion-list *ngIf="productos != undefined" [virtualScroll]="productos">
       <button ion-item  *virtualItem="#producto" (click)="verProducto(producto)">
           <ion-thumbnail item-left>
@@ -26,12 +35,14 @@
           <button clear item-right>Ver</button>
       </button>
   </ion-list>
+
   <ion-infinite-scroll (infinite)="loadMoreProducts($event)" *ngIf="more">
    <ion-infinite-scroll-content
        loadingSpinner="crescent"
       loadingText="Cargando Mas Productos...">
    ></ion-infinite-scroll-content>
  </ion-infinite-scroll>
+
 </ion-content>
 
 <button fab fab-top fab-right clear style="z-index:1000" (click)="toTop()"><ion-icon name="arrow-dropup"></ion-icon></button>

@@ -8,18 +8,22 @@ Ionic pages and navigation.
     <ion-title>{{producto.name}}</ion-title>
 </ion-navbar>
 
-<ion-content padding class="producto-details">
-    <ion-card padding>
-        <img id="imagen" *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + imgShow + ps.append}}">
-        <img *ngIf="!producto.id_default_image" src="img/sin-imagen.jpg">
+<ion-content  class="producto-details">
+    <ion-slides #mySlider style="height:40% !important;" loop="true" autoplay="4000"  pager>
 
-        <ion-row>
-            <ion-col width-20 *ngFor="#imagen of producto.associations.images">
-                <img (click)="imgShow = imagen.id" src="{{ps.url + 'images/products/' + producto.id + '/' + imagen.id +'/small_default' + ps.append}}"
+        <ion-slide style="width:100%" *ngFor="#imagen of producto.associations.images">
+            <img src="{{ps.url + 'images/products/' + producto.id + '/' + imagen.id +'/small_default' + ps.append}}" alt="">
+        </ion-slide>
+
+    </ion-slides>
+        <ion-row wrap>
+            <ion-col width-20 *ngFor="#imagen of producto.associations.images, #i = index">
+                <img (click)="goToSlide(i)" src="{{ps.url + 'images/products/' + producto.id + '/' + imagen.id +'/small_default' + ps.append}}"
                 alt=""  />
             </ion-col>
         </ion-row>
-    </ion-card>
+
+
 
     <ion-card>
         <ion-card-header>
@@ -52,6 +56,7 @@ Ionic pages and navigation.
             </ion-item>
         </ion-list>
     </ion-card>
+
     <button light full (click)="openProductoInWeb()"> <ion-icon name="cart"></ion-icon> Ver En Tienda</button>
 
 </ion-content>

@@ -1,0 +1,37 @@
+<ion-navbar *navbar primary>
+  <ion-title>Carrito</ion-title>
+</ion-navbar>
+
+<ion-content  class="carrito">
+
+        <ion-card *ngFor="#item of ps.carrito, #i = index"  >
+            <ion-grid>
+                <h2 text-center><b>Producto:</b>
+                    {{ item.name }}
+                    <button item-right danger small clear (click)="ps.carrito.splice(i,1)"> <ion-icon name="close"></ion-icon></button>
+                </h2>
+
+                <ion-row>
+                    <ion-col>
+                        <img src="img/sin-imagen.jpg"  >
+                    </ion-col>
+
+                    <ion-col width-50>
+                        <div text-center>
+                            <button clear round primary style="font-size:16px" (click)="item.quantity= item.quantity + 1"> <ion-icon name="add-circle"></ion-icon></button>
+                            <input  class="qty-input" type="number" [(ngModel)]="item.quantity">
+                            <button clear round danger style="font-size:16px" (click)="item.quantity= item.quantity - 1"> <ion-icon name="remove-circle"></ion-icon></button>
+                        </div>
+                    </ion-col>
+
+                    <ion-col>
+                        <p><b>Precio:</b> {{item.price}} $</p>
+                    </ion-col>
+                </ion-row>
+                <p text-right><b>Total:</b> {{item.price * item.quantity}} $ &nbsp;</p>
+            </ion-grid>
+        </ion-card>
+
+        <h3 text-right padding> TOTAL: {{ total() }}</h3>
+
+</ion-content>
