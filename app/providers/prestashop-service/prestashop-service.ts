@@ -16,11 +16,14 @@ export class PrestashopService {
     categories:any;
     shopname:String;
     user:any;
-    carrito:Array<any>= [{name:'nombre', quantity:30, price:1000}];
+    carrito:Array<any>= [];
     addresses:any;
-    
+    selectedAddress:number = null;
     constructor(public http: Http) {
+        this.storage.get('selectedAddress').then(data => { this.selectedAddress = data });
+
         this.getCategories().then((data) => {this.categories = data; });
+
         this.storage.getJson('user').then(data => {
             if (data.email != undefined) {
                 this.user = data;
@@ -28,6 +31,8 @@ export class PrestashopService {
             }
 
         });
+
+        this.storage.getJson('carrito').then(data => { if(data.length>0) this.carrito = data});
     }
 
 
@@ -67,11 +72,10 @@ export class PrestashopService {
         });
     }
 
-
-    encryptPassword(text){
-        return md5(this._COOKIE_KEY_+text);
+    pushCarrito(producto){
+        this.carrito.push(producto);
+        this.storage.setJson('carrito',this.carrito);
     }
-
 
     getConfigShop(){
         var filter= "?display=full&filter[name]=PS_SHOP_NAME";
@@ -85,7 +89,6 @@ export class PrestashopService {
             });
         });
     }
-
 
     getStores(){
         return new Promise(resolve => {
@@ -130,7 +133,14 @@ export class PrestashopService {
         let filtro ="?filter[id_customer]=" + user.id;
         this.getAdresses(filtro).then(data => {
             this.addresses = data;
-            console.log(data);
+            if(this.selectedAddress == null || this.selectedAddress > this.addresses.length){
+                this.selectedAddress = 0;
+                this.storage.set('selectedAddress',0);
+            }
         })
+    }
+
+    encryptPassword(text){
+        return md5(this._COOKIE_KEY_+text);
     }
 }

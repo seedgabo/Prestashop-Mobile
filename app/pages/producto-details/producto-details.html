@@ -22,6 +22,18 @@ Ionic pages and navigation.
                 alt=""  />
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button clear round primary style="font-size:16px" (click)="addPed()"> <ion-icon name="add-circle"></ion-icon></button>
+                <input  class="qty-input" type="number" max="{{producto.quantity}}" min="1" [(ngModel)]="pedido" value="1">
+                <button clear round danger style="font-size:16px" (click)="susPed()"> <ion-icon name="remove-circle"></ion-icon></button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center>
+                <button block secondary small (click)="addtoCart()"><ion-icon name="cart"></ion-icon> Agregar Al Carrito</button>
+            </ion-col>
+        </ion-row>
 
 
 
@@ -31,16 +43,16 @@ Ionic pages and navigation.
         </ion-card-header>
         <ion-list>
             <ion-item>
+                <ion-icon name="pricetag" primary small item-left></ion-icon>
+                <h3><b> Precio: </b> {{ toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</h3>
+            </ion-item>
+            <ion-item>
                 <ion-icon name="checkmark" primary small item-left></ion-icon>
                 <h3><b>Disponibilidad:</b> {{producto.active == 1 ?  "Disponible" : "No Disponible"}}</h3>
             </ion-item>
             <ion-item>
                 <ion-icon name="archive" primary small item-left></ion-icon>
                 <h3> <b>Stock:</b> {{producto.quantity ? producto.quantity :  "0"}}</h3>
-            </ion-item>
-            <ion-item>
-                <ion-icon name="pricetag" primary small item-left></ion-icon>
-                <h3><b> Precio: </b> {{ toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</h3>
             </ion-item>
             <ion-item>
                 <ion-icon name="alert" primary small item-left></ion-icon>

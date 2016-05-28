@@ -25,7 +25,7 @@ var MyApp = (function () {
     MyApp = __decorate([
         ionic_angular_1.App({
             template: '<ion-nav [root]="rootPage"></ion-nav>',
-            config: {},
+            config: { tabbarPlacement: 'top' },
             providers: [prestashop_service_1.PrestashopService],
         }), 
         __metadata('design:paramtypes', [ionic_angular_1.Platform, prestashop_service_1.PrestashopService])
@@ -54,9 +54,32 @@ var CarritoPage = (function () {
     CarritoPage.prototype.total = function () {
         var total = 0;
         for (var i = 0; i < this.ps.carrito.length; i++) {
-            total += this.ps.carrito[i].price * this.ps.carrito[i].quantity;
+            total += this.ps.carrito[i].precio * this.ps.carrito[i].pedido;
         }
         return total;
+    };
+    CarritoPage.prototype.addPed = function (producto) {
+        producto.pedido++;
+        if (producto.pedido > producto.quantity)
+            producto.pedido = producto.quantity;
+        if (producto.pedido <= 0)
+            producto.pedido = 1;
+        this.ps.storage.setJson('carrito', this.ps.carrito);
+    };
+    CarritoPage.prototype.susPed = function (producto) {
+        producto.pedido--;
+        if (producto.pedido > producto.quantity)
+            producto.pedido = producto.quantity;
+        if (producto.pedido <= 0)
+            producto.pedido = 1;
+        this.ps.storage.setJson('carrito', this.ps.carrito);
+    };
+    CarritoPage.prototype.deleteFromCarrito = function (index) {
+        this.ps.carrito.splice(index, 1);
+        this.ps.storage.setJson('carrito', this.ps.carrito);
+    };
+    CarritoPage.prototype.toCurrency = function (number) {
+        return Number.parseFloat(number);
     };
     CarritoPage = __decorate([
         ionic_angular_1.Page({
@@ -302,6 +325,7 @@ var Page3 = (function () {
         });
     }
     Page3.prototype.addContact = function (store) {
+        var _this = this;
         var contact = ionic_native_1.Contacts.create({
             displayName: store.name,
             nickname: store.name,
@@ -309,7 +333,7 @@ var Page3 = (function () {
             emails: [{ type: "work", value: store.email }]
         });
         contact.birthday = new Date();
-        contact.save(function (contact) { console.log("creado " + JSON.stringify(contact)); }, function (error) { });
+        contact.save(function (contact) { _this.nav.present(ionic_angular_1.Alert.create({ title: "Contacto Guardado", message: JSON.stringify(contact), buttons: ["ok"] })); }, function (error) { });
     };
     Page3.prototype.call = function (number) {
         ionic_native_1.InAppBrowser.open("tel:" + number, "_system", "");
@@ -360,6 +384,7 @@ var ProductoDetailsPage = (function () {
     function ProductoDetailsPage(nav, params, ps) {
         var _this = this;
         this.nav = nav;
+        this.pedido = 1;
         this.ps = ps;
         this.producto = params.get("producto");
         this.producto.quantity = 0;
@@ -373,6 +398,20 @@ var ProductoDetailsPage = (function () {
             this.ps.getStockByProduct(this.producto.id).then(function (data) { _this.producto.quantity = data.quantity; });
         }
     }
+    ProductoDetailsPage.prototype.addtoCart = function () {
+        var _this = this;
+        var result = $.grep(this.ps.carrito, function (e) { return e.id == _this.producto.id; });
+        if (result.length > 0) {
+            this.ps.carrito.splice(this.ps.carrito.indexOf(result), 1);
+            this.nav.present(ionic_angular_1.Toast.create({ message: "Producto Actualizado en el Carrito", showCloseButton: true, closeButtonText: "listo", duration: 3000 }));
+        }
+        else {
+            this.nav.present(ionic_angular_1.Toast.create({ message: "Producto Agregado Al Carrito", showCloseButton: true, closeButtonText: "listo", duration: 3000 }));
+        }
+        this.producto.pedido = this.pedido;
+        this.producto.imagen = this.ps.url + 'images/products/' + this.producto.id + '/' + this.producto.id_default_image + '/small_default' + this.ps.append;
+        this.ps.pushCarrito(this.producto);
+    };
     ProductoDetailsPage.prototype.toCurrency = function (number) {
         return Number.parseFloat(number);
     };
@@ -381,6 +420,20 @@ var ProductoDetailsPage = (function () {
     };
     ProductoDetailsPage.prototype.goToSlide = function (index) {
         this.slider.slideTo(index, 500);
+    };
+    ProductoDetailsPage.prototype.addPed = function () {
+        this.pedido++;
+        if (this.pedido <= 0)
+            this.pedido = 1;
+        if (this.pedido > this.producto.quantity)
+            this.pedido = this.producto.quantity;
+    };
+    ProductoDetailsPage.prototype.susPed = function () {
+        this.pedido--;
+        if (this.pedido < 0)
+            this.pedido = 1;
+        if (this.pedido > this.producto.quantity)
+            this.pedido = this.producto.quantity;
     };
     __decorate([
         core_1.ViewChild('mySlider'), 
@@ -459,6 +512,10 @@ var UserPage = (function () {
             console.log(data);
         });
     };
+    UserPage.prototype.addressChange = function (newValue) {
+        this.ps.selectedAddress = newValue;
+        this.ps.storage.set('selectedAddress', newValue);
+    };
     UserPage = __decorate([
         ionic_angular_1.Page({
             templateUrl: 'build/pages/user-page/user-page.html',
@@ -493,7 +550,9 @@ var PrestashopService = (function () {
         this.urlCategory = "http://www.eycproveedores.com/tienda/index.php?id_category=CategoryID&controller=category";
         this._COOKIE_KEY_ = "ZWitXiW4jqb73Ny0x0zGQi0GaU06aAtpRLqFaL2a8myyXA2stwKyQIF4";
         this.append = "&ws_key=KN2FTYHN3H63DKP82WWRHCDNKQZWE5U1&output_format=JSON";
-        this.carrito = [{ name: 'nombre', quantity: 30, price: 1000 }];
+        this.carrito = [];
+        this.selectedAddress = null;
+        this.storage.get('selectedAddress').then(function (data) { _this.selectedAddress = data; });
         this.getCategories().then(function (data) { _this.categories = data; });
         this.storage.getJson('user').then(function (data) {
             if (data.email != undefined) {
@@ -501,6 +560,8 @@ var PrestashopService = (function () {
                 _this.getAdresssByUser(_this.user);
             }
         });
+        this.storage.getJson('carrito').then(function (data) { if (data.length > 0)
+            _this.carrito = data; });
     }
     PrestashopService.prototype.loadProducts = function (filter) {
         var _this = this;
@@ -536,8 +597,9 @@ var PrestashopService = (function () {
             });
         });
     };
-    PrestashopService.prototype.encryptPassword = function (text) {
-        return md5(this._COOKIE_KEY_ + text);
+    PrestashopService.prototype.pushCarrito = function (producto) {
+        this.carrito.push(producto);
+        this.storage.setJson('carrito', this.carrito);
     };
     PrestashopService.prototype.getConfigShop = function () {
         var _this = this;
@@ -596,8 +658,14 @@ var PrestashopService = (function () {
         var filtro = "?filter[id_customer]=" + user.id;
         this.getAdresses(filtro).then(function (data) {
             _this.addresses = data;
-            console.log(data);
+            if (_this.selectedAddress == null || _this.selectedAddress > _this.addresses.length) {
+                _this.selectedAddress = 0;
+                _this.storage.set('selectedAddress', 0);
+            }
         });
+    };
+    PrestashopService.prototype.encryptPassword = function (text) {
+        return md5(this._COOKIE_KEY_ + text);
     };
     PrestashopService = __decorate([
         core_1.Injectable(), 

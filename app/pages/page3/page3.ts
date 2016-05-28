@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController,Alert} from 'ionic-angular';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 import {InAppBrowser,LaunchNavigator,Contacts} from 'ionic-native';
 import {UserPage} from '../user-page/user-page';
@@ -36,6 +36,7 @@ export class Page3 {
             },300);
         })
 
+
     }
 
     addContact(store){
@@ -46,7 +47,7 @@ export class Page3 {
             emails: [{type: "work", value:store.email}]
         });
         contact.birthday = new Date();
-        contact.save((contact) => {console.log("creado " + JSON.stringify(contact))},(error: Error) => {});
+        contact.save((contact) => { this.nav.present(Alert.create({ title:"Contacto Guardado", message: JSON.stringify(contact) , buttons: ["ok"]}))},(error: Error) => {});
 
     }
     call(number){

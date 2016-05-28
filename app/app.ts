@@ -4,7 +4,7 @@ import {TabsPage} from './pages/tabs/tabs';
 import {PrestashopService}  from './providers/prestashop-service/prestashop-service';
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {tabbarPlacement: 'top'}, // http://ionicframework.com/docs/v2/api/config/Config/
   providers: [PrestashopService],
 })
 export class MyApp {

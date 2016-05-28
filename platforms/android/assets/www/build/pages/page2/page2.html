@@ -1,7 +1,7 @@
 
 <ion-navbar primary *navbar>
     <ion-title>
-        Categorias
+        Categorias | <span> {{ps.user? ps.user.firstname : 'Invitado'}}</span>
     </ion-title>
     <ion-buttons end>
          <button (click)="navToCarrito()">
@@ -27,7 +27,7 @@
 
             <button class="category-item" ion-item *ngFor="#item of cat" (click)="cat = filtrarCategorias(item.id)">
                 <ion-avatar item-left>
-                    <img [src]="ps.url + 'images/categories/'+ item.id + ps.append" alt="</>" title="Imagen categoria" />
+                    <img [src]="ps.url + 'images/categories/'+ item.id + ps.append" alt=" " title="Imagen categoria" />
                 </ion-avatar>
                 {{item.name}}
             </button>
@@ -55,4 +55,4 @@
 
 </ion-content>
 
-<button fab fab-top fab-right clear style="z-index:1000" (click)="toTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
+<button fab fab-top fab-right clear style="z-index:10" (click)="toTop()"><ion-icon name="arrow-dropup"></ion-icon></button>

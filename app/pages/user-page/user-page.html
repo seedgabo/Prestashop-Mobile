@@ -11,7 +11,9 @@
         <h2>Email: {{ps.user.email}}</h2>
         <h2>Sexo: {{ps.user.id_gender == 1 ? 'Hombre' : 'Mujer'}}</h2>
         <h3>Fecha de Nacimiento {{ps.user.birthday}}</h3>
+        <br>
         <button center block danger outline (click)="ps.user = undefined"> Cerrar Sesión</button>
+        <br>
         <ion-list radio-group>
             <ion-item *ngFor="#address of ps.addresses, #i = index">
                 <ion-label>
@@ -19,7 +21,7 @@
                     <h2>{{address.address1}}</h2>
                     <h4>Ciudad: {{address.city}}</h4>
                 </ion-label>
-                <ion-radio  [value]="address.id"></ion-radio>
+                <ion-radio [checked]="i == ps.selectedAddress" (click)="addressChange(i)"></ion-radio>
             </ion-item>
         </ion-list>
     </ion-card>

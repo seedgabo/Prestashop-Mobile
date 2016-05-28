@@ -1,8 +1,11 @@
 <ion-navbar primary *navbar>
   <ion-toolbar>
       <ion-searchbar *ngIf="buscar" debounce="500" [(ngModel)]="queryTxt" (input)="getProducts($event)"> </ion-searchbar>
+      <ion-title *ngIf="!buscar">
+          Busqueda | <span> {{ps.user ? ps.user.firstname : 'Invitado'}}</span>
+      </ion-title>
       <ion-buttons end>
-          <button  (click)="buscar= !buscar; queryTxt=''">
+          <button  (click)="queryTxt=''; buscar= !buscar; ">
               <ion-icon [name]="buscar ? 'close' : 'search'"></ion-icon>
           </button>
 
@@ -45,4 +48,4 @@
 
 </ion-content>
 
-<button fab fab-top fab-right clear style="z-index:1000" (click)="toTop()"><ion-icon name="arrow-dropup"></ion-icon></button>
+<button fab fab-top fab-right clear style="z-index:10" (click)="toTop()"><ion-icon name="arrow-dropup"></ion-icon></button>

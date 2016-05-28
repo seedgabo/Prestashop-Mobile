@@ -1,7 +1,7 @@
 
 <ion-navbar primary *navbar>
     <ion-title>
-        Tiendas y Contactos
+        Contacto | <span> {{ps.user? ps.user.firstname : 'Invitado'}}</span>
     </ion-title>
         <ion-buttons end>
              <button (click)="navToCarrito()">

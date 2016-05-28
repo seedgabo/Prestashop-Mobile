@@ -23,4 +23,9 @@ export class UserPage {
           console.log(data);
       })
   }
+
+  addressChange(newValue){
+      this.ps.selectedAddress = newValue;
+      this.ps.storage.set('selectedAddress', newValue);
+  }
 }
