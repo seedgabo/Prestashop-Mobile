@@ -39,6 +39,9 @@
         },
         "cordova-plugin-x-toast": {
             "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
         }
     },
     "dependent_plugins": {

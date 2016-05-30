@@ -11,17 +11,20 @@ import {Toast} from 'ionic-native';
 })
 export class Page1 {
     queryTxt:string="";
-    buscar:boolean = false;
+    buscar:boolean = true;
     ps:PrestashopService;
     @ViewChild(Content) content: Content;
     productos:any;
     nav:NavController;
     page:number=1;
     more:boolean = true;
+    features:any;
+    nuevos:any;
     constructor(ps:PrestashopService, nav:NavController) {
         this.ps = ps;
         this.nav = nav;
         this.ps.getConfigShop();
+        this.getFeatureProducts();
     }
 
     verProducto(producto){
@@ -72,7 +75,8 @@ export class Page1 {
     }
 
     toCurrency(number:string){
-        return  Number.parseFloat(number);
+        let numero=  Number.parseFloat(number);
+        return   numero.format(2, 3, '.', ',') + " $";
     }
 
     toTop() {
@@ -86,4 +90,15 @@ export class Page1 {
     navToCarrito(){
         this.nav.push(CarritoPage);
     }
+
+    getFeatureProducts(){
+        var query = "?display=full&filter[description]=%[**]%&price[precio][use_tax]=1&limit=15";
+        this.ps.loadProducts(query).then((data:Array<any>)=>{
+            console.log(data);
+            this.features = data;
+        });
+    }
+
+
+
 }

@@ -394,7 +394,8 @@ module.exports.metadata =
     "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4",
     "cordova-plugin-inappbrowser": "1.4.0",
     "cordova-plugin-contacts": "2.1.0",
-    "cordova-plugin-x-toast": "2.5.1"
+    "cordova-plugin-x-toast": "2.5.1",
+    "cordova-plugin-crosswalk-webview": "1.7.0"
 }
 // BOTTOM OF METADATA
 });

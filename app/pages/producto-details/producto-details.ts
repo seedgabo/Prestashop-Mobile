@@ -28,7 +28,7 @@ export class ProductoDetailsPage {
 
 
   addtoCart(){
-      let result = $.grep(this.ps.carrito,(e) =>{ return e.id == this.producto.id; });
+      let result = $.grep(this.ps.carrito,(e) =>{ return e.id == this.producto.id });
       if(result.length > 0)
       {
           this.ps.carrito.splice(this.ps.carrito.indexOf(result),1);
@@ -43,7 +43,8 @@ export class ProductoDetailsPage {
   }
 
   toCurrency(number:string){
-      return  Number.parseFloat(number);
+      let numero=  Number.parseFloat(number);
+      return   numero.format(2, 3, '.', ',') + " $";
   }
 
   openProductoInWeb(){
@@ -56,15 +57,15 @@ export class ProductoDetailsPage {
 
   addPed(){
       this.pedido ++;
-       if(this.pedido <= 0)
-         this.pedido=1;
+       if(this.pedido < 1)
+         this.pedido =1;
       if(this.pedido > this.producto.quantity)
         this.pedido = this.producto.quantity;
   }
 
   susPed(){
       this.pedido--;
-     if(this.pedido <0)
+     if(this.pedido < 1)
        this.pedido=1;
     if(this.pedido > this.producto.quantity)
       this.pedido = this.producto.quantity;

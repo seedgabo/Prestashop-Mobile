@@ -33,6 +33,10 @@ var MyApp = (function () {
     return MyApp;
 }());
 exports.MyApp = MyApp;
+Number.prototype.format = function (n, x, s, c) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')', num = this.toFixed(Math.max(0, ~~n));
+    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+};
 },{"./pages/tabs/tabs":7,"./providers/prestashop-service/prestashop-service":9,"ionic-angular":343,"ionic-native":365}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -79,7 +83,8 @@ var CarritoPage = (function () {
         this.ps.storage.setJson('carrito', this.ps.carrito);
     };
     CarritoPage.prototype.toCurrency = function (number) {
-        return Number.parseFloat(number);
+        var numero = Number.parseFloat(number);
+        return numero.format(2, 3, '.', ',') + " $";
     };
     CarritoPage = __decorate([
         ionic_angular_1.Page({
@@ -111,12 +116,13 @@ var ionic_native_1 = require('ionic-native');
 var Page1 = (function () {
     function Page1(ps, nav) {
         this.queryTxt = "";
-        this.buscar = false;
+        this.buscar = true;
         this.page = 1;
         this.more = true;
         this.ps = ps;
         this.nav = nav;
         this.ps.getConfigShop();
+        this.getFeatureProducts();
     }
     Page1.prototype.verProducto = function (producto) {
         this.nav.push(producto_details_1.ProductoDetailsPage, { producto: producto });
@@ -162,7 +168,8 @@ var Page1 = (function () {
         });
     };
     Page1.prototype.toCurrency = function (number) {
-        return Number.parseFloat(number);
+        var numero = Number.parseFloat(number);
+        return numero.format(2, 3, '.', ',') + " $";
     };
     Page1.prototype.toTop = function () {
         this.content.scrollToTop();
@@ -172,6 +179,14 @@ var Page1 = (function () {
     };
     Page1.prototype.navToCarrito = function () {
         this.nav.push(carrito_1.CarritoPage);
+    };
+    Page1.prototype.getFeatureProducts = function () {
+        var _this = this;
+        var query = "?display=full&filter[description]=%[**]%&price[precio][use_tax]=1&limit=15";
+        this.ps.loadProducts(query).then(function (data) {
+            console.log(data);
+            _this.features = data;
+        });
     };
     __decorate([
         core_1.ViewChild(ionic_angular_1.Content), 
@@ -208,7 +223,7 @@ var Page2 = (function () {
         this.more = true;
         this.page = 1;
         this.order = [];
-        this.toggleMenu = true;
+        this.toggleMenu = false;
         this.principal = 2;
         this.actual = this.principal;
         this.ps = ps;
@@ -257,7 +272,8 @@ var Page2 = (function () {
         });
     };
     Page2.prototype.toCurrency = function (number) {
-        return Number.parseFloat(number);
+        var numero = Number.parseFloat(number);
+        return numero.format(2, 3, '.', ',') + " $";
     };
     Page2.prototype.toTop = function () {
         this.content.scrollToTop();
@@ -413,7 +429,8 @@ var ProductoDetailsPage = (function () {
         this.ps.pushCarrito(this.producto);
     };
     ProductoDetailsPage.prototype.toCurrency = function (number) {
-        return Number.parseFloat(number);
+        var numero = Number.parseFloat(number);
+        return numero.format(2, 3, '.', ',') + " $";
     };
     ProductoDetailsPage.prototype.openProductoInWeb = function () {
         ionic_native_1.InAppBrowser.open(this.ps.urlProduct.replace("ProductID", this.producto.id), "_system", "location=yes");
@@ -423,14 +440,14 @@ var ProductoDetailsPage = (function () {
     };
     ProductoDetailsPage.prototype.addPed = function () {
         this.pedido++;
-        if (this.pedido <= 0)
+        if (this.pedido < 1)
             this.pedido = 1;
         if (this.pedido > this.producto.quantity)
             this.pedido = this.producto.quantity;
     };
     ProductoDetailsPage.prototype.susPed = function () {
         this.pedido--;
-        if (this.pedido < 0)
+        if (this.pedido < 1)
             this.pedido = 1;
         if (this.pedido > this.producto.quantity)
             this.pedido = this.producto.quantity;
@@ -500,8 +517,16 @@ var UserPage = (function () {
     }
     UserPage.prototype.login = function (user, password) {
         var _this = this;
+        var loading = ionic_angular_1.Loading.create({ content: "Iniciando", duration: "10000" });
+        this.nav.present(loading);
         this.ps.login(user, password).then(function (data) {
-            _this.getAdresssByUser(_this.ps.user);
+            if (_this.ps.user != null) {
+                _this.getAdresssByUser(_this.ps.user);
+            }
+            else {
+                _this.nav.present(ionic_angular_1.Alert.create({ title: 'Error', message: 'Usuario o Contraseña Invalidos', buttons: ['Ok'] }));
+            }
+            loading.dismiss();
         });
     };
     UserPage.prototype.getAdresssByUser = function (user) {

@@ -30,7 +30,8 @@
     "uk.co.workingedge.phonegap.plugin.launchnavigator",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-contacts",
-    "cordova-plugin-x-toast"
+    "cordova-plugin-x-toast",
+    "cordova-plugin-crosswalk-webview"
   ],
   "cordovaPlatforms": [
     "android"

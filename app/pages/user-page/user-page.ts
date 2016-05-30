@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, Loading,Alert} from 'ionic-angular';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 @Page({
   templateUrl: 'build/pages/user-page/user-page.html',
@@ -11,8 +11,17 @@ export class UserPage {
       this.nav = nav;
   }
   login(user,password){
+      let loading = Loading.create({content:"Iniciando", duration: "10000"});
+      this.nav.present(loading)
       this.ps.login(user, password).then(data =>{
-          this.getAdresssByUser(this.ps.user);
+          if(this.ps.user != null){
+              this.getAdresssByUser(this.ps.user);
+          }
+          else
+          {
+              this.nav.present(Alert.create({title:'Error', message:'Usuario o Contraseña Invalidos',buttons:['Ok']}));
+          }
+          loading.dismiss();
       })
   }
 

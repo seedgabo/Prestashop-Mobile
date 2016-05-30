@@ -17,7 +17,7 @@ export class Page2 {
     page=1;
     order = [];
     cat:any;
-    toggleMenu= true;
+    toggleMenu= false;
     principal:number = 2;
     actual:number = this.principal;
 
@@ -73,7 +73,8 @@ export class Page2 {
 
 
     toCurrency(number:string){
-        return  Number.parseFloat(number);
+        let numero=  Number.parseFloat(number);
+        return   numero.format(2, 3, '.', ',') + " $";
     }
 
     toTop() {

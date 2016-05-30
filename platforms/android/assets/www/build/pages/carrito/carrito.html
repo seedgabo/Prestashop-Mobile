@@ -25,14 +25,14 @@
                     </ion-col>
 
                     <ion-col>
-                        <p><b>Precio:</b> {{ toCurrency(item.precio) | currency:'USD':true:'1.2-2'}} </p>
+                        <p><b>Precio:</b> {{ toCurrency(item.precio)}} </p>
                     </ion-col>
                 </ion-row>
-                <p text-right><b>Total:</b> {{ toCurrency(item.precio * item.pedido) | currency:'USD':true:'1.2-2'}} &nbsp;</p>
+                <p text-right><b>Total:</b> {{ toCurrency(item.precio * item.pedido)}} &nbsp;</p>
             </ion-grid>
         </ion-card>
 
-        <h3 text-right padding> TOTAL: {{ toCurrency(total()) | currency:'USD':true:'1.2-2' }}</h3>
+        <h3 text-right padding> TOTAL: {{ toCurrency(total()) }}</h3>
 
         <button large  primary block disabled> CONFIRMAR PEDIDO</button>
 

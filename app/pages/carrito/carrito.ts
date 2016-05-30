@@ -45,7 +45,8 @@ export class CarritoPage {
     }
 
     toCurrency(number:string){
-        return  Number.parseFloat(number);
+        let numero=  Number.parseFloat(number);
+        return   numero.format(2, 3, '.', ',') + " $";
     }
 
 }

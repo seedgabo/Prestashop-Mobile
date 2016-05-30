@@ -14,24 +14,23 @@
     </ion-buttons>
 </ion-navbar>
 
-<ion-content  class="page2">
+<ion-content padding class="page2">
 
     <ion-card  no-padding>
         <div>
-            <button light small round (click)="toggleMenu= !toggleMenu"><ion-icon name="menu" ></ion-icon></button>
-            <button light small  *ngFor="#item of order, #i = index"  (click)="order = order.slice(0,i); cat = filtrarCategorias(item);">
-                {{ getCagoriabyId(item).name }}
+            <button light small round  *ngFor="#item of order, #i = index"  (click)="order = order.slice(0,i); cat = filtrarCategorias(item);">
+                <ion-icon name="arrow-dropleft"></ion-icon> {{ getCagoriabyId(item).name }}
             </button>
+            <button *ngIf="cat.length >0" light small round (click)="toggleMenu= !toggleMenu"><ion-icon name="arrow-dropdown" ></ion-icon> Mas </button>
         </div>
-        <ion-list *ngIf="toggleMenu">
-
-            <button class="category-item" ion-item *ngFor="#item of cat" (click)="cat = filtrarCategorias(item.id)">
-                <ion-avatar item-left>
-                    <img [src]="ps.url + 'images/categories/'+ item.id + ps.append" alt=" " title="Imagen categoria" />
+        <div *ngIf="toggleMenu" class="toggle-menu" padding>
+            <button ion-item class="category-item" small light *ngFor="#item of cat" (click)="cat = filtrarCategorias(item.id); toggleMenu=false;">
+                <ion-avatar item-left >
+                    <img [src]="ps.url + 'images/categories/'+ item.id + ps.append" alt="" title="Imagen categoria" />
                 </ion-avatar>
                 {{item.name}}
             </button>
-        </ion-list>
+        </div>
     </ion-card>
 
     <ion-list [virtualScroll]="productos" approxItemHeight="100px" bufferRatio="4">
@@ -42,7 +41,7 @@
             </ion-thumbnail>
             <h2>{{producto.name}}</h2>
             <h3 secondary>{{producto.quantity > 0 ? producto.quantity :  "Disponible"}}</h3>
-            <p>{{ toCurrency(producto.precio) |currency:'USD':true:'1.2-2'}}</p>
+            <p>{{ toCurrency(producto.precio)}}</p>
             <button clear item-right>Ver</button>
         </button>
     </ion-list>

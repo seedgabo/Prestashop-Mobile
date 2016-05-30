@@ -318,7 +318,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-x-toast": "2.5.1",
     "ionic-plugin-keyboard": "2.1.0",
-    "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4"
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4",
+    "cordova-plugin-crosswalk-webview": "1.7.0"
 };
 // BOTTOM OF METADATA
 });
