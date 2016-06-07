@@ -27,7 +27,7 @@
             <h3 text-center primary><ion-icon name="star" ></ion-icon> PRODUCTOS DESTACADOS</h3>
             <ion-slides  *ngIf="features" autoplay="3000" loop="true" pager="true">
                 <ion-slide  *ngFor="#producto of features, #i = index">
-                    <ion-img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/'+ ps.append}}"> </ion-img>
+                    <ion-img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ ps.append}}"> </ion-img>
                     <ion-img  *ngIf="!producto.id_default_image" src="{{'img/sin-imagen.jpg'}}"> </ion-img>
                     <button block outline primary (click)="verProducto(producto)">Ver</button>
                     <h5 text-center>{{producto.name}}</h5>
