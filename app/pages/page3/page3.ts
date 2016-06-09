@@ -1,10 +1,11 @@
-import {Page, NavController,Alert} from 'ionic-angular';
+import {NavController,Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 import {InAppBrowser,LaunchNavigator,Contacts} from 'ionic-native';
 import {UserPage} from '../user-page/user-page';
 import {CarritoPage} from '../carrito/carrito';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/page3/page3.html'
 })
 export class Page3 {

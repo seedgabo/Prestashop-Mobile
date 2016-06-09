@@ -309,6 +309,7 @@ module.exports.metadata =
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-console": "1.0.3",
     "cordova-plugin-contacts": "2.1.0",
+    "cordova-plugin-crosswalk-webview": "1.7.0",
     "cordova-plugin-device": "1.1.2",
     "cordova-plugin-file": "4.2.0",
     "cordova-plugin-file-transfer": "1.5.1",
@@ -318,8 +319,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-x-toast": "2.5.1",
     "ionic-plugin-keyboard": "2.1.0",
-    "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4",
-    "cordova-plugin-crosswalk-webview": "1.7.0"
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4"
 };
 // BOTTOM OF METADATA
 });

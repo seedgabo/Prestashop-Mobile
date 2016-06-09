@@ -1,0 +1,43 @@
+<ion-navbar *navbar>
+  <ion-title>{{direccion.id ? 'Agregar nueva Dirección': ' Editar Dirección'}}</ion-title>
+  <ion-buttons end>
+      <button (click)="dismiss()"> <ion-icon name="close"></ion-icon></button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content padding class="agregar-direccion">
+    <ion-item>
+        <ion-label stacked> Alias</ion-label>
+        <ion-input [(ngModel)]="direccion.alias"></ion-input>
+    </ion-item>
+  <ion-item>
+    <ion-label stacked>País</ion-label>
+    <ion-select [(ngModel)]="direccion.id_country" (change)="getStates()">
+      <ion-option  [value]="country.id" *ngFor="#country of countries">{{country.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="direccion.id_country">
+    <ion-label stacked>Estado</ion-label>
+    <ion-select [(ngModel)]="direccion.id_state">
+      <ion-option  [value]="state.id" *ngFor="#state of states">{{state.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+    <ion-item>
+        <ion-label stacked> Ciudad</ion-label>
+        <ion-input [(ngModel)]="direccion.city"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked> Telefono</ion-label>
+        <ion-input type="number" [(ngModel)]="direccion.phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked> Dirección</ion-label>
+        <ion-textarea [(ngModel)]="direccion.address1"></ion-textarea>
+    </ion-item>
+
+    <button primary block *ngIf="!direccion.id" [disabled]="!direccionRellena()" (click)="agregarDireccion()">Agregar</button>
+    <button primary block *ngIf="direccion.id" [disabled]="!direccionRellena()" (click)="editarDireccion()">Editar</button>
+</ion-content>

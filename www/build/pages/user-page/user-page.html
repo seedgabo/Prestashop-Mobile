@@ -12,18 +12,25 @@
         <h2>Sexo: {{ps.user.id_gender == 1 ? 'Hombre' : 'Mujer'}}</h2>
         <h3>Fecha de Nacimiento {{ps.user.birthday}}</h3>
         <br>
-        <button center block danger outline (click)="ps.user = undefined"> Cerrar Sesión</button>
+        <button center block danger outline (click)="cerrarSession()"> Cerrar Sesión</button>
         <br>
         <ion-list radio-group>
-            <ion-item *ngFor="#address of ps.addresses, #i = index">
-                <ion-label>
-                    <h1 text-center>{{address.alias}}</h1>
-                    <h2>{{address.address1}}</h2>
-                    <h4>Ciudad: {{address.city}}</h4>
-                </ion-label>
-                <ion-radio [checked]="i == ps.selectedAddress" (click)="addressChange(i)"></ion-radio>
-            </ion-item>
+            <ion-item-sliding *ngFor="let address of ps.addresses, let i = index">
+                <ion-item >
+                    <ion-label>
+                        <h2 text-center>{{address.alias}}</h2>
+                        <h3>{{address.address1}}</h3>
+                        <h4>Ciudad: {{address.city}}</h4>
+
+                    </ion-label>
+                    <ion-radio [checked]="i == ps.selectedAddress" (click)="addressChange(i)"></ion-radio>
+                </ion-item>
+                <ion-item-options>
+                    <button (click)="modalAddressUpdate(address)">Editar </button>
+                </ion-item-options>
+            </ion-item-sliding>
         </ion-list>
+        <button primary (click)="modalAddressNew()">Agregar Dirección</button>
     </ion-card>
 
 
@@ -44,7 +51,7 @@
         <button block primary outline large (click)="login(email,password)"><ion-icon name="log-in"></ion-icon> Iniciar</button>
         <br>
         <p danger>¿Aun no registrado?</p>
-        <button block dark outline ><ion-icon name="person"></ion-icon><ion-icon name="add"></ion-icon>  Registrarse</button>
+        <button block dark outline (click)="modalRegistrarUsuario()"><ion-icon name="person"></ion-icon><ion-icon name="add"></ion-icon>  Registrarse</button>
     </div>
 
 </ion-content>

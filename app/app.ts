@@ -1,11 +1,10 @@
-import {App, Platform} from 'ionic-angular';
+import {ionicBootstrap,App, Platform} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {PrestashopService}  from './providers/prestashop-service/prestashop-service';
-@App({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {tabbarPlacement: 'top'}, // http://ionicframework.com/docs/v2/api/config/Config/
-  providers: [PrestashopService],
+@Component({
+  template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
 export class MyApp {
   rootPage: any = TabsPage;
@@ -19,6 +18,10 @@ export class MyApp {
   }
 
 }
+
+ionicBootstrap(MyApp, [PrestashopService], {
+  tabbarPlacement: 'top'
+});
 Number.prototype.format = function(n, x, s, c) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
         num = this.toFixed(Math.max(0, ~~n));

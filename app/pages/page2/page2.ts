@@ -1,11 +1,11 @@
 import {Page,NavController,Content} from 'ionic-angular';
-import {ViewChild} from 'angular2/core';
+import {Component,ViewChild} from '@angular/core';
 import {ProductoDetailsPage} from '../producto-details/producto-details';
 import {PrestashopService}  from '../../providers/prestashop-service/prestashop-service';
 import {UserPage} from '../user-page/user-page';
 import {CarritoPage} from '../carrito/carrito';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/page2/page2.html',
 })
 export class Page2 {

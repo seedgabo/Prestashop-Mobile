@@ -1,12 +1,12 @@
-import {Page,NavController, Content, Modal} from 'ionic-angular';
-import {ViewChild} from 'angular2/core';
+import {NavController, Content, Modal} from 'ionic-angular';
+import {Component,ViewChild} from '@angular/core';
 import {PrestashopService} from '../../providers/prestashop-service/prestashop-service';
 import {ProductoDetailsPage} from '../producto-details/producto-details';
 import {UserPage} from '../user-page/user-page';
 import {CarritoPage} from '../carrito/carrito';
 import {Toast} from 'ionic-native';
 
-@Page({
+@Component({
     templateUrl: 'build/pages/page1/page1.html',
 })
 export class Page1 {
@@ -68,6 +68,7 @@ export class Page1 {
             }
             if(data!=undefined && data.length < 15){
                 this.more= false;
+                infiniteScroll.enable(false);
             }
 
             infiniteScroll.complete();
@@ -94,11 +95,8 @@ export class Page1 {
     getFeatureProducts(){
         var query = "?display=full&filter[description]=%[**]%&price[precio][use_tax]=1&limit=15";
         this.ps.loadProducts(query).then((data:Array<any>)=>{
-            console.log(data);
             this.features = data;
         });
     }
-
-
 
 }

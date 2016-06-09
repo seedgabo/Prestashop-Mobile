@@ -34,6 +34,6 @@
 
         <h3 text-right padding> TOTAL: {{ toCurrency(total()) }}</h3>
 
-        <button large  primary block disabled> CONFIRMAR PEDIDO</button>
+        <button large  primary block (click)="confirmarPedido()" [disabled]="ps.carrito.length == 0"> CONFIRMAR PEDIDO</button>
 
 </ion-content>

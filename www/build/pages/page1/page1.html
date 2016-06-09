@@ -26,7 +26,7 @@
         <ion-card padding>
             <h3 text-center primary><ion-icon name="star" ></ion-icon> PRODUCTOS DESTACADOS</h3>
             <ion-slides  *ngIf="features" autoplay="3000" loop="true" pager="true">
-                <ion-slide  *ngFor="#producto of features, #i = index">
+                <ion-slide  *ngFor="let producto of features, let i = index">
                     <ion-img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ ps.append}}"> </ion-img>
                     <ion-img  *ngIf="!producto.id_default_image" src="{{'img/sin-imagen.jpg'}}"> </ion-img>
                     <button block outline primary (click)="verProducto(producto)">Ver</button>
@@ -38,7 +38,7 @@
     </div>
 
     <ion-list *ngIf="productos" [virtualScroll]="productos">
-        <button ion-item  *virtualItem="#producto" (click)="verProducto(producto)">
+        <button ion-item  *virtualItem="let producto" (click)="verProducto(producto)">
             <ion-thumbnail item-left>
                 <ion-img *ngIf="producto.id_default_image" src="{{ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append}}"> </ion-img>
                 <ion-img *ngIf="!producto.id_default_image" src="{{'img/sin-imagen.jpg'}}"> </ion-img>
@@ -50,10 +50,10 @@
         </button>
     </ion-list>
 
-    <ion-infinite-scroll (infinite)="loadMoreProducts($event)" *ngIf="more">
+    <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)" *ngIf="more">
         <ion-infinite-scroll-content
         loadingSpinner="crescent"
-        loadingText="Cargando Mas Productos...">
+        loadingText="Cargando Mas Productos..." >
         ></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 

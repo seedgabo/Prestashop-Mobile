@@ -7,6 +7,12 @@
     <feature name="Contacts">
         <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
     </feature>
+    <preference name="webView" value="org.crosswalk.engine.XWalkWebViewEngine" />
+    <preference default="xwalk_core_library_beta:18+" name="xwalkVersion" />
+    <preference default="xwalk_core_library_canary:17+" name="xwalkLiteVersion" />
+    <preference default="--disable-pull-to-refresh-effect" name="xwalkCommandLine" />
+    <preference default="embedded" name="xwalkMode" />
+    <preference default="true" name="xwalkMultipleApk" />
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -42,12 +48,6 @@
     <feature name="LaunchNavigator">
         <param name="android-package" value="uk.co.workingedge.phonegap.plugin.LaunchNavigator" />
     </feature>
-    <preference name="webView" value="org.crosswalk.engine.XWalkWebViewEngine" />
-    <preference default="xwalk_core_library_beta:18+" name="xwalkVersion" />
-    <preference default="xwalk_core_library_canary:17+" name="xwalkLiteVersion" />
-    <preference default="--disable-pull-to-refresh-effect" name="xwalkCommandLine" />
-    <preference default="embedded" name="xwalkMode" />
-    <preference default="true" name="xwalkMultipleApk" />
     <allow-intent href="market:*" />
     <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />

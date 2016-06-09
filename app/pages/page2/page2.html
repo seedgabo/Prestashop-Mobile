@@ -18,23 +18,23 @@
 
     <ion-card  no-padding>
         <div>
-            <button light small round  *ngFor="#item of order, #i = index"  (click)="order = order.slice(0,i); cat = filtrarCategorias(item);">
-                <ion-icon name="arrow-dropleft"></ion-icon> {{ getCagoriabyId(item).name }}
+            <button light small round  *ngFor="let item of order, let i = index"  (click)="order = order.slice(0,i); cat = filtrarCategorias(item);">
+                <ion-icon name="arrow-dropleft"></ion-icon> <small>{{ getCagoriabyId(item).name }}</small>
             </button>
             <button *ngIf="cat.length >0" light small round (click)="toggleMenu= !toggleMenu"><ion-icon name="arrow-dropdown" ></ion-icon> Mas </button>
         </div>
         <div *ngIf="toggleMenu" class="toggle-menu" padding>
-            <button ion-item class="category-item" small light *ngFor="#item of cat" (click)="cat = filtrarCategorias(item.id); toggleMenu=false;">
+            <button ion-item class="category-item" small light *ngFor="let item of cat" (click)="cat = filtrarCategorias(item.id); toggleMenu=false;">
                 <ion-avatar item-left >
                     <img [src]="ps.url + 'images/categories/'+ item.id + ps.append" alt="" title="Imagen categoria" />
                 </ion-avatar>
-                {{item.name}}
+                <small>{{item.name}}</small>
             </button>
         </div>
     </ion-card>
 
     <ion-list [virtualScroll]="productos" approxItemHeight="100px" bufferRatio="4">
-        <button ion-item  *virtualItem="#producto" (click)="verProducto(producto)">
+        <button ion-item  *virtualItem="let producto" (click)="verProducto(producto)">
             <ion-thumbnail item-left>
                 <ion-img *ngIf="producto.id_default_image" [src]="ps.url + 'images/products/' + producto.id + '/' + producto.id_default_image+ '/small_default'+ ps.append"></ion-img>
                 <img *ngIf="!producto.id_default_image" src="img/sin-imagen.jpg"/>
@@ -46,7 +46,7 @@
         </button>
     </ion-list>
 
-    <ion-infinite-scroll (infinite)="loadMoreProducts($event)" *ngIf="more">
+    <ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)" *ngIf="more">
         <ion-infinite-scroll-content
         loadingText="Cargando Mas Productos...">
         ></ion-infinite-scroll-content>

@@ -8,51 +8,51 @@
     },
     "installed_plugins": {
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-x-toast": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
             "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-actionsheet": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         }
     }
 }

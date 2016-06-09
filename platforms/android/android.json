@@ -17,6 +17,30 @@
                             "count": 1
                         },
                         {
+                            "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference default=\"xwalk_core_library_beta:18+\" name=\"xwalkVersion\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference default=\"xwalk_core_library_canary:17+\" name=\"xwalkLiteVersion\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference default=\"--disable-pull-to-refresh-effect\" name=\"xwalkCommandLine\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference default=\"embedded\" name=\"xwalkMode\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference default=\"true\" name=\"xwalkMultipleApk\" />",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
@@ -55,30 +79,6 @@
                         {
                             "xml": "<feature name=\"LaunchNavigator\"><param name=\"android-package\" value=\"uk.co.workingedge.phonegap.plugin.LaunchNavigator\" /></feature>",
                             "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"xwalk_core_library_beta:18+\" name=\"xwalkVersion\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"xwalk_core_library_canary:17+\" name=\"xwalkLiteVersion\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"--disable-pull-to-refresh-effect\" name=\"xwalkCommandLine\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"embedded\" name=\"xwalkMode\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference default=\"true\" name=\"xwalkMultipleApk\" />",
-                            "count": 1
                         }
                     ]
                 }
@@ -99,16 +99,16 @@
                             "count": 1
                         },
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
                             "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 2
                         }
                     ]
                 }
@@ -117,48 +117,48 @@
     },
     "installed_plugins": {
         "cordova-plugin-actionsheet": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "cordova-plugin-x-toast": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
-        },
-        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
-            "PACKAGE_NAME": "com.ionicframework.prestashopmobile167992"
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.seedgabo.eycproov2304"
+        },
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": {
             "PACKAGE_NAME": "com.seedgabo.eycproov2304"
         }
     },
@@ -471,6 +471,7 @@
         "cordova-plugin-compat": "1.0.0",
         "cordova-plugin-console": "1.0.3",
         "cordova-plugin-contacts": "2.1.0",
+        "cordova-plugin-crosswalk-webview": "1.7.0",
         "cordova-plugin-device": "1.1.2",
         "cordova-plugin-file": "4.2.0",
         "cordova-plugin-file-transfer": "1.5.1",
@@ -480,7 +481,6 @@
         "cordova-plugin-whitelist": "1.2.2",
         "cordova-plugin-x-toast": "2.5.1",
         "ionic-plugin-keyboard": "2.1.0",
-        "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4",
-        "cordova-plugin-crosswalk-webview": "1.7.0"
+        "uk.co.workingedge.phonegap.plugin.launchnavigator": "3.0.4"
     }
 }
