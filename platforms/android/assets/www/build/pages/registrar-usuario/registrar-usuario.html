@@ -1,0 +1,58 @@
+<ion-navbar *navbar secondary>
+    <ion-title>Registrar Nuevo Usuario</ion-title>
+    <ion-buttons end>
+        <button (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+</ion-navbar>
+
+<ion-content padding class="registrar-usuario">
+    <h2>Ingrese sus Datos:</h2>
+    <ion-item class="error">
+        <ion-label stacked> Email</ion-label>
+        <ion-input placeholder="ejemplo@ejemplo.com"  type="email"  [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+    <div class="error-box" *ngIf="user.email && user.email.indexOf('@')==-1" >
+        Debe ser un email valido
+    </div>
+
+    <ion-item>
+        <ion-label floating> Contraseña</ion-label>
+        <ion-input min="3" type="password" [(ngModel)]="user.passwd"></ion-input>
+    </ion-item>
+    <div class="error-box" *ngIf="user.passwd && user.passwd.length <6" >
+        La contraseña debe tener al menos 6 caracteres
+    </div>
+
+    <ion-item>
+        <ion-label floating> Nombres</ion-label>
+        <ion-input [(ngModel)]="user.firstname"></ion-input>
+    </ion-item>
+    <div class="error-box" *ngIf="user.firstname && user.firstname.length <6" >
+        Nombre invalido
+    </div>
+
+    <ion-item>
+        <ion-label floating> Apellidos</ion-label>
+        <ion-input [(ngModel)]="user.lastname"></ion-input>
+    </ion-item>
+    <div class="error-box" *ngIf="user.lastname && user.lastname.length <6" >
+        Apellido invalido
+    </div>
+
+
+    <ion-item>
+        <ion-label floating>Sexo</ion-label>
+        <ion-select [(ngModel)]="user.gender">
+            <ion-option value="1">Hombre</ion-option>
+            <ion-option value="2">Mujer</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Fecha de Nacimiento</ion-label>
+        <ion-datetime displayFormat="DD-MMMM-YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="user.birthday"></ion-datetime>
+    </ion-item>
+
+    <button large  secondary outline  block [disabled]="!formValid()"  (click)="CrearUsuario()">Completar Registro <ion-icon name="person-add"></ion-icon></button>
+
+</ion-content>

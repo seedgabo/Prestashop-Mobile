@@ -12,10 +12,10 @@
         <h2>Sexo: {{ps.user.id_gender == 1 ? 'Hombre' : 'Mujer'}}</h2>
         <h3>Fecha de Nacimiento {{ps.user.birthday}}</h3>
         <br>
-        <button center block danger outline (click)="ps.user = undefined"> Cerrar Sesión</button>
+        <button center block danger outline (click)="cerrarSession()"> Cerrar Sesión</button>
         <br>
         <ion-list radio-group>
-            <ion-item-sliding *ngFor="#address of ps.addresses, #i = index">
+            <ion-item-sliding *ngFor="let address of ps.addresses, let i = index">
                 <ion-item >
                     <ion-label>
                         <h2 text-center>{{address.alias}}</h2>
@@ -51,7 +51,7 @@
         <button block primary outline large (click)="login(email,password)"><ion-icon name="log-in"></ion-icon> Iniciar</button>
         <br>
         <p danger>¿Aun no registrado?</p>
-        <button block dark outline ><ion-icon name="person"></ion-icon><ion-icon name="add"></ion-icon>  Registrarse</button>
+        <button block dark outline (click)="modalRegistrarUsuario()"><ion-icon name="person"></ion-icon><ion-icon name="add"></ion-icon>  Registrarse</button>
     </div>
 
 </ion-content>

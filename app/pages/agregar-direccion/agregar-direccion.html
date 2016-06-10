@@ -1,5 +1,5 @@
 <ion-navbar *navbar>
-  <ion-title>{{direccion.id ? 'Agregar nueva Dirección': ' Editar Dirección'}}</ion-title>
+  <ion-title>{{ !direccion.id ? 'Agregar nueva Dirección': ' Editar Dirección'}}</ion-title>
   <ion-buttons end>
       <button (click)="dismiss()"> <ion-icon name="close"></ion-icon></button>
   </ion-buttons>
@@ -12,7 +12,7 @@
     </ion-item>
   <ion-item>
     <ion-label stacked>País</ion-label>
-    <ion-select [(ngModel)]="direccion.id_country" (change)="getStates()">
+    <ion-select [(ngModel)]="direccion.id_country" (ionChange)="getStates()">
       <ion-option  [value]="country.id" *ngFor="let country of countries">{{country.name}}</ion-option>
     </ion-select>
   </ion-item>
@@ -30,7 +30,7 @@
     </ion-item>
     <ion-item>
         <ion-label stacked> Telefono</ion-label>
-        <ion-input type="number" [(ngModel)]="direccion.phone"></ion-input>
+        <ion-input type="tel" [(ngModel)]="direccion.phone"></ion-input>
     </ion-item>
 
     <ion-item>

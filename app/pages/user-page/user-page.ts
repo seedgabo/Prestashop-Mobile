@@ -67,7 +67,7 @@ export class UserPage {
     modalRegistrarUsuario(){
         let modal = Modal.create(RegistrarUsuarioPage);
         this.nav.present(modal);
-        modal.onDismiss( data =>{
+        modal.onDismiss(data =>{
 
         });
     }

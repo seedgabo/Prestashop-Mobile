@@ -35,6 +35,8 @@ exports.MyApp = MyApp;
 ionic_angular_1.ionicBootstrap(MyApp, [prestashop_service_1.PrestashopService], {
     tabbarPlacement: 'top',
     prodMode: false,
+    monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    monthShortNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
 });
 Number.prototype.format = function (n, x, s, c) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')', num = this.toFixed(Math.max(0, ~~n));
@@ -92,6 +94,7 @@ var AgregarDireccionPage = (function () {
             '<firstname>' + this.ps.user.firstname + '</firstname>' +
             '<vat_number></vat_number>' +
             '<address1>' + this.direccion.address1 + '</address1>' +
+            '<city>' + this.direccion.city + '</city>' +
             '<other>' + this.direccion.other + '</other>' +
             '<phone>' + this.direccion.phone + '</phone>' +
             '<phone_mobile></phone_mobile>' +
@@ -208,6 +211,14 @@ var CarritoPage = (function () {
     };
     CarritoPage.prototype.confirmarPedido = function () {
         var _this = this;
+        if (!this.ps.user) {
+            this.nav.present(ionic_angular_1.Alert.create({ title: "Advertencia", message: "Debe iniciar sesión para realizar pedidos", buttons: ["ok"] }));
+            return;
+        }
+        if (!(this.ps.selectedAddress != undefined && this.ps.addresses[this.ps.selectedAddress])) {
+            this.nav.present(ionic_angular_1.Alert.create({ title: "Advertencia", message: "Debe elegir una dirección para realizar pedidos", buttons: ["ok"] }));
+            return;
+        }
         var ConfirmarAlert = ionic_angular_1.Alert.create({
             message: "¿Esta Seguro de que desea procesar el Carrito?",
             title: 'Confirmar',
@@ -716,7 +727,11 @@ var RegistrarUsuarioPage = (function () {
         this.viewCtrl.dismiss();
     };
     RegistrarUsuarioPage.prototype.CrearUsuario = function () {
-        console.log(this.crearUsuarioXml());
+        var _this = this;
+        this.ps.postCustomer(this.crearUsuarioXml()).then(function (data) {
+            console.log(data);
+            _this.dismiss();
+        });
     };
     RegistrarUsuarioPage.prototype.crearUsuarioXml = function () {
         var xml = '<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">' +
@@ -733,6 +748,14 @@ var RegistrarUsuarioPage = (function () {
             '</customer>' +
             '</prestashop>';
         return xml;
+    };
+    RegistrarUsuarioPage.prototype.formValid = function () {
+        return (this.user.email && (this.user.email.indexOf('@') > -1)) &&
+            (this.user.passwd && this.user.passwd.length > 6) &&
+            (this.user.firstname && this.user.firstname.length >= 3) &&
+            (this.user.lastname && this.user.lastname.length >= 3) &&
+            (this.user.birthday) &&
+            (this.user.gender);
     };
     RegistrarUsuarioPage = __decorate([
         core_1.Component({
@@ -1011,6 +1034,20 @@ var PrestashopService = (function () {
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 resolve(data);
+            }, function (error) { console.log(error); });
+        });
+    };
+    PrestashopService.prototype.postCustomer = function (xml) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.http.post(_this.url + "customers" + _this.append, xml)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                if (data.customer) {
+                    _this.user = data.customer;
+                    _this.storage.setJson('user', _this.user);
+                }
+                resolve(data.customer);
             }, function (error) { console.log(error); });
         });
     };

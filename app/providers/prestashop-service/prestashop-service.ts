@@ -158,6 +158,20 @@ export class PrestashopService {
         });
     }
 
+    postCustomer(xml){
+        return new Promise(resolve => {
+            this.http.post(this.url + "customers" + this.append,xml)
+            .map(res => res.json())
+            .subscribe(data => {
+                if(data.customer){
+                    this.user = data.customer;
+                    this.storage.setJson('user', this.user);
+                }
+                resolve(data.customer);
+            }, error => {console.log(error)});
+        });
+    }
+
     postCart(xml){
         return new Promise(resolve => {
             this.http.post(this.url + "carts" + this.append,xml)

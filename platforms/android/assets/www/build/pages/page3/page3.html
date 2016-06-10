@@ -16,7 +16,7 @@
 
 <ion-content class="page3">
 
-    <ion-card class="adv-map" *ngFor="#store of stores; #i = index">
+    <ion-card class="adv-map" *ngFor="let store of stores; let i = index">
         <ion-card-header>
             <ion-icon name="map" item-left large></ion-icon> {{store.name | uppercase}}
         </ion-card-header>

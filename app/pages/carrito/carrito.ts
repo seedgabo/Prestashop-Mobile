@@ -60,6 +60,14 @@ export class CarritoPage {
     }
 
     confirmarPedido(){
+        if(!this.ps.user){
+            this.nav.present(Alert.create({title:"Advertencia", message:"Debe iniciar sesión para realizar pedidos", buttons: ["ok"]}))
+            return;
+        }
+        if(!(this.ps.selectedAddress != undefined  && this.ps.addresses[this.ps.selectedAddress])){
+            this.nav.present(Alert.create({title:"Advertencia", message:"Debe elegir una dirección para realizar pedidos", buttons: ["ok"]}))
+            return;
+        }
         let ConfirmarAlert = Alert.create({
             message:"¿Esta Seguro de que desea procesar el Carrito?",
             title:'Confirmar',

@@ -20,7 +20,10 @@ export class MyApp {
 }
 
 ionicBootstrap(MyApp, [PrestashopService], {
-  tabbarPlacement: 'top'
+  tabbarPlacement: 'top',
+  prodMode : false,
+  monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+  monthShortNames: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
 });
 Number.prototype.format = function(n, x, s, c) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',

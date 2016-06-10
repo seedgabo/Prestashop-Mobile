@@ -9107,6 +9107,13 @@ body {
 .spinner-crescent circle {
   stroke: blue; }
 
+.error-box {
+  background: #f6f3cf;
+  color: red;
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 10px 10px 10px 10px; }
+
 .page3 .map {
   display: block;
   width: 100%;

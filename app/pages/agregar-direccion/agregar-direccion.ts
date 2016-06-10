@@ -50,6 +50,7 @@ export class AgregarDireccionPage {
                 '<firstname>'+ this.ps.user.firstname+'</firstname>'+
                 '<vat_number></vat_number>'+
                 '<address1>'+ this.direccion.address1+'</address1>'+
+                '<city>'+ this.direccion.city+'</city>'+
                 '<other>'+ this.direccion.other+'</other>'+
                 '<phone>'+ this.direccion.phone+'</phone>'+
                 '<phone_mobile></phone_mobile>'+

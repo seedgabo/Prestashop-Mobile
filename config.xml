@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.seedgabo.eycproov2304" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.seedgabo.eycproov2304" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tienda EyC </name>
     <description>Lleva tu tienda Online Adonde Quieras</description>
     <author email="seedgabo@gmail.com" href="http://residenciasonline.com/">SeedGabo | Gabriel Bejarano</author>
@@ -67,7 +67,7 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="1500" />
+    <preference name="SplashScreenDelay" value="4000" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
@@ -78,7 +78,7 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.1.3" />
     <plugin name="ionic-plugin-keyboard" spec="~2.1.0" />
     <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
-    <preference name="xwalkVersion" value="xwalk_core_library_beta:18+" />
+    <preference name="xwalkVersion" value="org.xwalk:xwalk_core_library_beta:18.48.477.11" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />

@@ -1,9 +1,3 @@
-<!--
-Generated template for the ProductoDetailsPage page.
-
-See http://ionicframework.com/docs/v2/components/#navigation for more info on
-Ionic pages and navigation.
--->
 <ion-navbar secondary *navbar>
     <ion-title>{{producto.name}}</ion-title>
 </ion-navbar>
@@ -13,14 +7,14 @@ Ionic pages and navigation.
 
         <ion-slides #mySlider style="height:40% !important;" loop="true" autoplay="4000"  pager>
 
-            <ion-slide style="width:100%" *ngFor="#imagen of producto.associations.images">
+            <ion-slide style="width:100%" *ngFor="let imagen of producto.associations.images">
                 <img src="{{ps.url + 'images/products/' + producto.id + '/' + imagen.id +'/large_default' + ps.append}}" alt="">
             </ion-slide>
 
         </ion-slides>
 
     <ion-row wrap>
-        <ion-col width-20 *ngFor="#imagen of producto.associations.images, #i = index">
+        <ion-col width-20 *ngFor="let imagen of producto.associations.images, let i = index">
             <img (click)="goToSlide(i)" src="{{ps.url + 'images/products/' + producto.id + '/' + imagen.id +'/large_default' + ps.append}}"
             alt=""  />
         </ion-col>

@@ -4,7 +4,7 @@
 
 <ion-content  class="carrito">
 
-        <ion-card *ngFor="#item of ps.carrito, #i = index"  >
+        <ion-card *ngFor="let item of ps.carrito, let i = index"  >
             <ion-grid>
                 <h2 text-center><b>Producto:</b>
                     {{ item.name }}
@@ -13,7 +13,7 @@
 
                 <ion-row>
                     <ion-col>
-                        <img [src]="item.imagen"  >
+                        <img [src]="item.imagen">
                     </ion-col>
 
                     <ion-col width-50>

@@ -22,7 +22,10 @@ export class RegistrarUsuarioPage {
     }
 
     CrearUsuario(){
-        console.log(this.crearUsuarioXml());
+        this.ps.postCustomer(this.crearUsuarioXml()).then(data =>{
+            console.log(data);
+            this.dismiss();
+        });
     }
 
     crearUsuarioXml(){
@@ -42,4 +45,12 @@ export class RegistrarUsuarioPage {
                         return xml;
     }
 
+    formValid(){
+        return ( this.user.email  && (this.user.email.indexOf('@') > -1)) &&
+        ( this.user.passwd  && this.user.passwd.length > 6) &&
+        ( this.user.firstname  && this.user.firstname.length >= 3) &&
+        ( this.user.lastname  && this.user.lastname.length >= 3) &&
+        (this.user.birthday) &&
+        (this.user.gender);
+    }
 }
